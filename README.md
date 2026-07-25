@@ -29,7 +29,7 @@ graph TD
     D -->|Fetch Content Data| E[data/content.json - Structured Data Store]
     
     F[Admin / Client Owner] -->|Access /admin.html| G[Passcode Lock Screen Gatekeeper]
-    G -->|Verify PIN 123456| H[admin.js - CMS Admin Engine]
+    G -->|Verify PIN *****| H[admin.js - CMS Admin Engine]
     H -->|Input Sanitization & escapeHTML| I[LocalStorage & Live Sync]
     I -->|Export & Backup| E
 ```
