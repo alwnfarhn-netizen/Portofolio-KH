@@ -191,7 +191,59 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// ==========================================
+// Supabase Cloud Live Sync Credentials
+// ==========================================
+const SUPABASE_URL = 'https://uksp6rxubbaxca1fcaax.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ukSp6RxUBBAXca1fcAAx_Q_ovbddB6h';
+const PORTFOLIO_SLUG = 'khofia';
+
+async function syncToSupabaseCloud() {
+  if (!SUPABASE_URL || !SUPABASE_KEY) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/portfolios`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({
+        slug: PORTFOLIO_SLUG,
+        content: cmsData,
+        updated_at: new Date().toISOString()
+      })
+    });
+  } catch (err) {
+    console.warn('Supabase cloud sync:', err);
+  }
+}
+
 function loadDefaultJSON() {
+  if (SUPABASE_URL && SUPABASE_KEY) {
+    fetch(`${SUPABASE_URL}/rest/v1/portfolios?slug=eq.${PORTFOLIO_SLUG}&select=content`, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      }
+    })
+    .then(res => res.json())
+    .then(rows => {
+      if (rows && rows.length > 0 && rows[0].content) {
+        cmsData = rows[0].content;
+        renderAll();
+        return;
+      }
+      fetchLocalContentJSON();
+    })
+    .catch(() => fetchLocalContentJSON());
+  } else {
+    fetchLocalContentJSON();
+  }
+}
+
+function fetchLocalContentJSON() {
   fetch('data/content.json')
     .then(res => res.json())
     .then(data => {
@@ -208,8 +260,12 @@ function saveAllChanges(silent = false) {
   localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
   updateLastSaved();
   updateJSONPreview();
+
+  // Async sync to Supabase Cloud DB
+  syncToSupabaseCloud();
+
   if (!silent) {
-    cmsAlert('Perubahan Anda telah disimpan dan langsung aktif di website portofolio.', 'success');
+    cmsAlert('Perubahan Anda telah disimpan dan langsung aktif terhubung live di seluruh dunia!', 'success');
   }
 }
 

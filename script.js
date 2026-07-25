@@ -209,16 +209,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 1. Data Loader & Dynamic Renderer Engine (LocalStorage Sync First)
-  const localSaved = localStorage.getItem('portfolio_cms_data');
-  if (localSaved) {
-    try {
-      appData = JSON.parse(localSaved);
-      renderAllDynamicContent(appData);
-    } catch (e) {
-      loadJSONContent();
+  // ==========================================
+  // Supabase Cloud Live Sync Credentials
+  // ==========================================
+  const SUPABASE_URL = 'https://uksp6rxubbaxca1fcaax.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_ukSp6RxUBBAXca1fcAAx_Q_ovbddB6h';
+  const PORTFOLIO_SLUG = 'khofia';
+
+  // 1. Data Loader & Dynamic Renderer Engine (Supabase Cloud Sync First)
+  loadAppData();
+
+  async function loadAppData() {
+    if (SUPABASE_URL && SUPABASE_KEY) {
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/portfolios?slug=eq.${PORTFOLIO_SLUG}&select=content`, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+        if (res.ok) {
+          const rows = await res.json();
+          if (rows && rows.length > 0 && rows[0].content) {
+            appData = rows[0].content;
+            renderAllDynamicContent(appData);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Supabase fetch fallback:', err);
+      }
     }
-  } else {
+
+    const localSaved = localStorage.getItem('portfolio_cms_data');
+    if (localSaved) {
+      try {
+        appData = JSON.parse(localSaved);
+        renderAllDynamicContent(appData);
+        return;
+      } catch (e) {}
+    }
+
     loadJSONContent();
   }
 
