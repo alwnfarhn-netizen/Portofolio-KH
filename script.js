@@ -303,6 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (el) el.innerText = p.name;
     }
     if (p.subtitle) {
+      if (i18nData.id) i18nData.id.hero_subtitle = p.subtitle;
       const el = document.querySelector('.hero-subtitle');
       if (el) el.innerText = p.subtitle;
     }
@@ -311,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (el) el.innerText = p.institution;
     }
     if (p.tagline) {
+      if (i18nData.id) i18nData.id.hero_tagline = p.tagline;
       const el = document.querySelector('.hero-tagline');
       if (el) el.innerText = p.tagline;
     }
@@ -320,6 +322,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (p.email) {
       document.querySelectorAll('a[href^="mailto:"]').forEach(a => a.href = `mailto:${p.email}`);
+    }
+  }
+
+  function renderVideoInfo(v) {
+    if (!v) return;
+    if (v.title) {
+      if (i18nData.id) i18nData.id.video_title = v.title;
+      const el = document.querySelector('.video-card-title, .video-showcase-title');
+      if (el) el.innerText = v.title;
+    }
+    if (v.sub) {
+      if (i18nData.id) i18nData.id.video_sub = v.sub;
+      const el = document.querySelector('.video-card-sub, .video-showcase-sub');
+      if (el) el.innerText = v.sub;
+    }
+    if (v.small) {
+      if (i18nData.id) i18nData.id.video_small = v.small;
+      const el = document.querySelector('.video-card-tag, .video-showcase-small');
+      if (el) el.innerText = v.small;
+    }
+    if (v.image) {
+      const img = document.querySelector('.video-cover-img, .video-thumbnail-wrapper img');
+      if (img) img.src = v.image;
     }
   }
 
