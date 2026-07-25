@@ -136,4 +136,4 @@ khofidotur-rofiah/
 
 ---
 
-© 2026 **Dr. Khofidotur Rofiah, M.Pd., Ph.D.** • Platform Powered by [Portify](https://portify-sepia.vercel.app/)
+©Platform Powered by [Portify](https://portify-sepia.vercel.app/)
