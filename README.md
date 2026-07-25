@@ -11,10 +11,10 @@ Website ini dibangun menggunakan arsitektur **Modern Vanilla Static Architecture
 
 ---
 
-## 🔗 🌐 Live Demo & Portify Platform
+## 🔗 🌐 Live Production Website & Portify Platform
 
-- 📌 **Live Website Portfolio:** [http://localhost:5500/](http://localhost:5500/)
-- ⚙️ **Admin CMS Portal:** [http://localhost:5500/admin.html](http://localhost:5500/admin.html)
+- 📌 **Live Website Portfolio:** [https://khofia.vercel.app/](https://khofia.vercel.app/)
+- ⚙️ **Admin CMS Portal:** [https://khofia.vercel.app/admin.html](https://khofia.vercel.app/admin.html) *(PIN Akses Default: `123456`)*
 - 🚀 **Built with Portify Platform:** [https://portify-sepia.vercel.app/](https://portify-sepia.vercel.app/)
 
 ---
