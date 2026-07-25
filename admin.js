@@ -133,7 +133,13 @@ function cmsModal({ icon, title, body, changes = null, isDanger = false, confirm
     const confirmBtn = document.getElementById('modal-confirm-btn');
     const cancelBtn  = document.getElementById('modal-cancel-btn');
     confirmBtn.textContent = confirmLabel;
-    cancelBtn.textContent  = cancelLabel;
+    
+    if (cancelLabel) {
+      cancelBtn.style.display = 'inline-flex';
+      cancelBtn.textContent = cancelLabel;
+    } else {
+      cancelBtn.style.display = 'none';
+    }
 
     if (isDanger) {
       confirmBtn.className = 'btn btn-danger';
