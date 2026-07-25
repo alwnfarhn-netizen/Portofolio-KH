@@ -1,0 +1,189 @@
+{
+  "profile": {
+    "name": "Dr. Khofidotur Rofiah, M.Pd., Ph.D.",
+    "subtitle": "Kepala Prodi & Dosen Pendidikan Luar Biasa",
+    "institution": "Universitas Negeri Surabaya (UNESA)",
+    "tagline": "Peneliti Pendidikan Inklusif & Pendidikan Luar Biasa. Berfokus pada intervensi komunikasi (Signalong Indonesia), sikap guru lintas budaya, dan hak disabilitas.",
+    "avatar": "assets/foto-profil-nobg.png",
+    "email": "khofidoturrofiah@unesa.ac.id",
+    "scholar": "https://scholar.google.com/citations?user=hOzHm2EAAAAJ",
+    "researchgate": "https://www.researchgate.net/profile/Khofidotur-Rofiah",
+    "scopus": "https://www.scopus.com/authid/detail.uri?authorId=57196192608"
+  },
+  "stats": {
+    "publications": "45+",
+    "citations": "355+",
+    "years": "10+",
+    "countries": "4"
+  },
+  "video": {
+    "title": "Signalong Indonesia",
+    "sub": "@ FIP UNESA, Surabaya",
+    "small": "Riset & Pengabdian 2026",
+    "youtubeUrl": "https://www.youtube.com/embed/",
+    "image": "assets/foto-profil.jpg"
+  },
+  "research": [
+    {
+      "id": "res-1",
+      "title": "Signalong Indonesia",
+      "image": "assets/foto-profil.jpg",
+      "description": "Pengembangan sistem komunikasi berbasis kata kunci (keyword sign system) untuk anak dengan hambatan komunikasi, diadaptasi dari sistem Signalong Inggris untuk konteks Indonesia."
+    },
+    {
+      "id": "res-2",
+      "title": "Pendidikan Inklusif",
+      "image": "assets/foto-profil.jpg",
+      "description": "Riset komparatif lintas budaya mengenai sikap, persiapan pedagogis, dan persepsi guru terhadap pendidikan inklusif di Indonesia, Polandia, Jerman, Slovakia, dan Kamerun."
+    },
+    {
+      "id": "res-3",
+      "title": "Pendidikan Tunarungu",
+      "image": "assets/foto-profil.jpg",
+      "description": "Strategi literasi, media pembelajaran visual (Big Books berbasis isyarat), dan pengembangan sarana komunikasi bagi peserta didik dengan hambatan pendengaran."
+    },
+    {
+      "id": "res-4",
+      "title": "Anak Berkebutuhan Khusus",
+      "image": "assets/foto-profil.jpg",
+      "description": "Intervensi berbasis bukti untuk anak dengan ADHD, autisme, disabilitas intelektual, serta strategi pengurangan risiko bencana (DRR) berbasis inklusi di pendidikan anak usia dini."
+    }
+  ],
+  "publications": [
+    {
+      "id": "pub-1",
+      "title": "Professionalism, multicultural preparation, and pedagogical practice: A comparative study of pre-service teachers' experiences in Cameroon and Indonesia",
+      "journal": "Teaching and Teacher Education",
+      "year": 2026,
+      "type": "scopus",
+      "url": "https://www.researchgate.net/publication/408442632"
+    },
+    {
+      "id": "pub-2",
+      "title": "Bridging green building and accessibility standards in Higher Education: Towards an inclusive campus framework for SDGs 10 and 11",
+      "journal": "E3S Web of Conferences",
+      "year": 2026,
+      "type": "scopus",
+      "url": "https://www.researchgate.net/publication/401553915"
+    },
+    {
+      "id": "pub-3",
+      "title": "Inclusive disaster risk reduction education. Evaluating sign supported books for Indonesian kindergartens",
+      "journal": "International Journal of Inclusive Education",
+      "year": 2025,
+      "type": "scopus",
+      "url": "https://www.researchgate.net/publication/395740885"
+    },
+    {
+      "id": "pub-4",
+      "title": "Teachers' Attitudes Towards Inclusive Education in a Cultural Context",
+      "journal": "Horyzonty Wychowania",
+      "year": 2024,
+      "type": "inclusive",
+      "url": "https://www.researchgate.net/publication/387596619"
+    },
+    {
+      "id": "pub-5",
+      "title": "Towards inclusive practice in Indonesian kindergartens: Evaluating the impact of Sign Supported Big Books",
+      "journal": "Journal of Early Childhood Research",
+      "year": 2024,
+      "type": "signalong",
+      "url": "https://www.researchgate.net/publication/372945670"
+    },
+    {
+      "id": "pub-6",
+      "title": "Digital Literacy and Perception of Inclusive Education of Preservice Teachers at Indonesian Universities",
+      "journal": "Communications in Computer and Information Science",
+      "year": 2024,
+      "type": "scopus",
+      "url": "https://www.researchgate.net/publication/381847299"
+    },
+    {
+      "id": "pub-7",
+      "title": "Navigating Learning Differences: The Role of Mind Mapping in Fostering Inclusivity in Science Education",
+      "journal": "International Journal of Special Education (IJSE)",
+      "year": 2024,
+      "type": "inclusive",
+      "url": "https://www.researchgate.net/publication/386441549"
+    },
+    {
+      "id": "pub-8",
+      "title": "Inclusive education at Universitas Negeri Surabaya: Perceptions and realities of students with disabilities",
+      "journal": "International Journal of Special Education (IJSE)",
+      "year": 2023,
+      "type": "inclusive",
+      "url": "https://www.researchgate.net/publication/375064291"
+    },
+    {
+      "id": "pub-9",
+      "title": "Fun and the benefits of Sign Supported Big Books in mainstream Indonesian kindergartens",
+      "journal": "International Journal of Early Years Education",
+      "year": 2021,
+      "type": "signalong",
+      "url": "https://www.researchgate.net/publication/353458464"
+    },
+    {
+      "id": "pub-10",
+      "title": "The Implementation of CBT to Reduce Hyperactive Behaviors among Adolescents with ADHD",
+      "journal": "International Journal of Online and Biomedical Engineering (iJOE)",
+      "year": 2021,
+      "type": "scopus",
+      "url": "https://www.researchgate.net/publication/356638654"
+    }
+  ],
+  "blog": [
+    {
+      "id": "post-1",
+      "title": "Pentingnya Sistem Isyarat Kata Kunci (Signalong) dalam Komunikasi Anak Tunarungu",
+      "category": "Signalong Indonesia",
+      "date": "15 Mei 2026",
+      "readTime": "5 min baca",
+      "summary": "Bagaimana adaptasi metode Signalong dari Inggris membantu mempercepat pemahaman kosa kata anak dengan hambatan pendengaran dan komunikasi di TK inklusi Indonesia.",
+      "content": "Signalong Indonesia merupakan adaptasi dari Keyword Sign System asal Inggris yang dikembangkan secara spesifik untuk memfasilitasi anak dengan hambatan komunikasi verbal. Metode ini menggabungkan bahasa isyarat kata kunci dengan tuturan lisan secara bersamaan untuk memperkuat pemahaman kognitif dan bahasa anak."
+    },
+    {
+      "id": "post-2",
+      "title": "Sikap Guru Terhadap Pendidikan Inklusif: Catatan Komparatif Indonesia dan Polandia",
+      "category": "Studi Komparatif",
+      "date": "02 Februari 2026",
+      "readTime": "6 min baca",
+      "summary": "Refleksi dari disertasi doktor di Pedagogical University of Cracow mengenai perbedaan kultur, tantangan pedagogis, dan kesiapan fasilitas pendukung inklusi.",
+      "content": "Riset disertasi doktoral di Polandia menunjukkan bahwa kesiapan mental dan sikap guru sekolah reguler memainkan peranan sebesar 70% terhadap keberhasilan pendidikan inklusif. Di Indonesia, tantangan utama terletak pada pelatihan pedagogis khusus dan ketersediaan Guru Pendamping Khusus (GPK)."
+    },
+    {
+      "id": "post-3",
+      "title": "Integrasi Pengurangan Risiko Bencana (DRR) di Sekolah Inklusi Usia Dini",
+      "category": "Mitigasi Bencana",
+      "date": "20 November 2025",
+      "readTime": "4 min baca",
+      "summary": "Membangun kesiapsiagaan bencana bagi anak berkebutuhan khusus melalui media pembelajaran visual dan buku cerita berbasis isyarat.",
+      "content": "Anak-anak berkebutuhan khusus terbukti menjadi kelompok paling rentan saat terjadi bencana alam. Integrasi edukasi mitigasi bencana melalui Sign Supported Big Books terbukti efektif mengajarkan prosedur evakuasi mandiri secara menyenangkan."
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gal-1",
+      "image": "assets/foto-profil.jpg",
+      "title": "Disertasi Doktoral di Polandia",
+      "description": "Sidang disertasi Ph.D. di Pedagogical University of Cracow, Polandia (2024)."
+    },
+    {
+      "id": "gal-2",
+      "image": "assets/foto-profil.jpg",
+      "title": "Workshop Signalong Indonesia",
+      "description": "Pelatihan sistem komunikasi kata kunci bagi guru-guru sekolah inklusi di Surabaya."
+    },
+    {
+      "id": "gal-3",
+      "image": "assets/foto-profil.jpg",
+      "title": "Pengajaran di PLB UNESA",
+      "description": "Kegiatan perkuliahan dan bimbingan mahasiswa Departemen Pendidikan Luar Biasa FIP UNESA."
+    },
+    {
+      "id": "gal-4",
+      "image": "assets/foto-profil.jpg",
+      "title": "Konferensi & Seminar Riset",
+      "description": "Presentasi makalah ilmiah dalam seminar internasional pendidikan luar biasa."
+    }
+  ]
+}

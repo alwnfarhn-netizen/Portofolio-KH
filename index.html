@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>Khofidotur Rofiah, M.Pd., Ph.D. | Dosen PLB UNESA | Peneliti Pendidikan Inklusif</title>
+  <meta name="title" content="Khofidotur Rofiah, M.Pd., Ph.D. | Dosen PLB UNESA | Peneliti Pendidikan Inklusif">
+  <meta name="description" content="Portofolio akademik Dr. Khofidotur Rofiah, dosen Pendidikan Luar Biasa Universitas Negeri Surabaya. Peneliti pendidikan inklusif, Signalong Indonesia, dan pendidikan tunarungu. 45 publikasi internasional, 355+ sitasi.">
+  <meta name="keywords" content="Khofidotur Rofiah, PLB UNESA, pendidikan inklusif, Signalong Indonesia, tunarungu, special education Indonesia, UNESA, FIP">
+  <meta name="author" content="Khofidotur Rofiah">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Dr. Khofidotur Rofiah — Peneliti Pendidikan Inklusif UNESA">
+  <meta property="og:description" content="45 publikasi internasional, 355+ sitasi. Dosen PLB FIP Universitas Negeri Surabaya.">
+  <meta property="og:image" content="assets/foto-profil-nobg.png">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://khofidotur-rofiah.vercel.app">
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="VERIFICATION_CODE_SEARCH_CONSOLE" />
+
+  <!-- Google Analytics (GA4) — Isi Measurement ID GA4 Anda di sini saat deploy -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
+  <!-- Schema.org Structured Data (JSON-LD) - Paket Pro SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dr. Khofidotur Rofiah, M.Pd., Ph.D.",
+    "jobTitle": "Kepala Program Studi & Dosen Pendidikan Luar Biasa",
+    "worksFor": {
+      "@type": "EducationalOrganization",
+      "name": "Universitas Negeri Surabaya",
+      "alternateName": "UNESA"
+    },
+    "almaMater": [
+      {
+        "@type": "EducationalOrganization",
+        "name": "Pedagogical University of Cracow"
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "Universitas Negeri Surabaya"
+      }
+    ],
+    "sameAs": [
+      "https://scholar.google.com/citations?user=hOzHm2EAAAAJ",
+      "https://www.researchgate.net/profile/Khofidotur-Rofiah",
+      "https://www.scopus.com/authid/detail.uri?authorId=57196192608"
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts (Poppins for Headings, Inter for Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+
+  <header class="header-nav">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-logo">
+        Dr. Khofidotur Rofiah <span>.</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#about" class="nav-link" data-i18n="nav_about">Tentang</a></li>
+        <li><a href="#research" class="nav-link" data-i18n="nav_research">Fokus Riset</a></li>
+        <li><a href="#publications" class="nav-link" data-i18n="nav_pubs">Publikasi</a></li>
+        <li><a href="#blog" class="nav-link" data-i18n="nav_blog">Blog &amp; Catatan</a></li>
+        <li><a href="#gallery" class="nav-link" data-i18n="nav_gallery">Galeri</a></li>
+        <li><a href="#profiles" class="nav-link" data-i18n="nav_profiles">Profil Akademik</a></li>
+      </ul>
+      <div class="nav-right-actions">
+        <a href="#contact" class="btn btn-outline nav-contact-btn" data-i18n="nav_contact">Kontak</a>
+        <div class="lang-switcher-pill">
+          <button class="lang-btn active" data-lang="id">ID</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <!-- Hamburger Menu Button (Mobile Only) -->
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Buka Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div id="mobile-overlay" class="mobile-overlay"></div>
+
+  <!-- Mobile Navigation Drawer -->
+  <nav id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <span class="drawer-logo">Dr. Khofidotur Rofiah <span>.</span></span>
+      <button id="drawer-close" class="drawer-close" aria-label="Tutup Menu">✕</button>
+    </div>
+    <div class="lang-switcher-pill" style="margin: 0 1.5rem 1.5rem;">
+      <button class="lang-btn active" data-lang="id">ID</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <ul class="drawer-nav">
+      <li><a href="#about" class="drawer-link" data-i18n="nav_about">Tentang</a></li>
+      <li><a href="#research" class="drawer-link" data-i18n="nav_research">Fokus Riset</a></li>
+      <li><a href="#publications" class="drawer-link" data-i18n="nav_pubs">Publikasi</a></li>
+      <li><a href="#blog" class="drawer-link" data-i18n="nav_blog">Blog &amp; Catatan</a></li>
+      <li><a href="#gallery" class="drawer-link" data-i18n="nav_gallery">Galeri</a></li>
+      <li><a href="#profiles" class="drawer-link" data-i18n="nav_profiles">Profil Akademik</a></li>
+      <li><a href="#contact" class="drawer-link drawer-contact" data-i18n="nav_contact">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge" data-i18n="hero_badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            Fakultas Ilmu Pendidikan · UNESA
+          </div>
+          <h1 class="hero-title">Khofidotur Rofiah, M.Pd., Ph.D.</h1>
+          <p class="hero-subtitle" data-i18n="hero_subtitle">Kepala Prodi &amp; Dosen Pendidikan Luar Biasa</p>
+          <p class="hero-institution">Universitas Negeri Surabaya (UNESA)</p>
+          <p class="hero-tagline" data-i18n="hero_tagline">
+            Peneliti Pendidikan Inklusif &amp; Pendidikan Luar Biasa. Berfokus pada intervensi komunikasi (Signalong Indonesia), sikap guru lintas budaya, dan hak disabilitas.
+          </p>
+
+          <div class="hero-socials">
+            <a href="https://scholar.google.com/citations?user=hOzHm2EAAAAJ" target="_blank" rel="noopener noreferrer" class="social-btn" title="Google Scholar">
+              <svg viewBox="0 0 24 24"><path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z"/><path d="M12 5.5l7 5.25-2.1 1.575V17.5h-2.8v-3.5H9.9v3.5H7.1v-5.175L5 10.75z"/></svg>
+              Google Scholar
+            </a>
+            <a href="https://www.researchgate.net/profile/Khofidotur-Rofiah" target="_blank" rel="noopener noreferrer" class="social-btn" title="ResearchGate">
+              <svg viewBox="0 0 24 24"><path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v19.056c0 1.368-1.104 2.472-2.46 2.472H4.46C3.104 24 2 22.896 2 21.528V2.472C2 1.104 3.104 0 4.46 0h15.08zM9.543 6.026h-2.9v11.948h2.9c1.943 0 3.324-1.282 3.324-3.18 0-1.898-1.38-3.18-3.324-3.18H7.957V6.026zm0 4.148c.677 0 1.157.48 1.157 1.258 0 .778-.48 1.258-1.157 1.258H7.957v-2.516h1.586z"/></svg>
+              ResearchGate
+            </a>
+            <a href="https://www.scopus.com/authid/detail.uri?authorId=57196192608" target="_blank" rel="noopener noreferrer" class="social-btn" title="Scopus ID">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              Scopus
+            </a>
+            <a href="mailto:khofidoturrofiah@unesa.ac.id" class="social-btn" title="Email Kontak">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              Email
+            </a>
+          </div>
+
+          <a href="#publications" class="btn btn-primary" data-i18n="hero_btn_pub">
+            Lihat Publikasi Terpilih →
+          </a>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <div class="hero-image-card">
+            <img src="assets/foto-profil-nobg.png?v=3" alt="Foto Dr. Khofidotur Rofiah" onerror="this.onerror=null; this.src='assets/foto-profil.jpg';">
+            <div class="avatar-fallback" style="display: none;">
+              KR
+              <span>Dr. Khofidotur Rofiah</span>
+            </div>
+          </div>
+          
+          <div class="hero-doctor-badge">
+            <div class="doctor-badge-icon">🎓</div>
+            <div class="doctor-badge-text">
+              <p>Gelar Doktor (Ph.D.)</p>
+              <h4>Pedagogical Univ. of Cracow</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section (Dark Theme with Animated Count-Up Counter) -->
+  <section id="stats" class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item" data-count="45">
+          <div class="stat-number" data-target="45+">0+</div>
+          <div class="stat-label" data-i18n="stat_pubs">Publikasi Riset</div>
+        </div>
+        <div class="stat-item" data-count="355">
+          <div class="stat-number" data-target="355+">0+</div>
+          <div class="stat-label" data-i18n="stat_citations">Sitasi Google Scholar</div>
+        </div>
+        <div class="stat-item" data-count="10">
+          <div class="stat-number" data-target="10+">0+</div>
+          <div class="stat-label" data-i18n="stat_years">Tahun Mengajar</div>
+        </div>
+        <div class="stat-item" data-count="4">
+          <div class="stat-number" data-target="4">0</div>
+          <div class="stat-label" data-i18n="stat_countries">Negara Kolaborasi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section-pad about-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Profil Ringkas</span>
+        <h2 class="section-title">Tentang Saya</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="bio-card">
+          <h3>Biografi Akademik</h3>
+          <p class="bio-text">
+            Dr. Khofidotur Rofiah adalah dosen dan peneliti di Departemen Pendidikan Luar Biasa, Universitas Negeri Surabaya (UNESA) sejak 2014. Sebelum bergabung dengan UNESA, beliau berkarier sebagai guru pendidikan khusus di sekolah-sekolah penyelenggara pendidikan inklusif di Surabaya (2011–2013).
+          </p>
+          <p class="bio-text">
+            Beliau menyelesaikan studi doktoral di Pedagogical University of Cracow, Polandia (2020–2024) dengan disertasi tentang sikap guru terhadap pendidikan inklusif di Indonesia dan Polandia. Saat ini fokus risetnya mencakup pengembangan sistem komunikasi berbasis kata kunci untuk anak dengan hambatan komunikasi (Signalong Indonesia), pendidikan inklusif lintas budaya, dan pendidikan untuk anak berkebutuhan khusus.
+          </p>
+
+          <h4 class="skills-heading">Bidang Keahlian &amp; Minat Riset</h4>
+          <div class="skills-wrapper">
+            <span class="skill-chip">Pendidikan Inklusif</span>
+            <span class="skill-chip">Pendidikan Luar Biasa</span>
+            <span class="skill-chip">Signalong Indonesia</span>
+            <span class="skill-chip">Pendidikan Tunarungu</span>
+            <span class="skill-chip">Intervensi ADHD &amp; Autisme</span>
+            <span class="skill-chip">Literasi Digital</span>
+          </div>
+        </div>
+
+        <div class="timeline-card">
+          <!-- Riwayat Pendidikan -->
+          <div class="timeline-group">
+            <h3 class="timeline-group-title">
+              <span>🎓</span> Riwayat Pendidikan
+            </h3>
+            <div class="timeline-list">
+              <div class="timeline-item">
+                <div class="timeline-period">2020 – 2024</div>
+                <div class="timeline-degree">Doctor of Philosophy (Ph.D.)</div>
+                <div class="timeline-institution">Pedagogical University of Cracow, Polandia</div>
+                <div class="timeline-detail">Disertasi: Teachers' attitudes toward inclusive education between Poland and Indonesia</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-period">S2</div>
+                <div class="timeline-degree">Magister Pendidikan (M.Pd.)</div>
+                <div class="timeline-institution">Pendidikan Luar Biasa — Universitas Negeri Surabaya (UNESA)</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-period">S1</div>
+                <div class="timeline-degree">Sarjana Pendidikan (S.Pd.)</div>
+                <div class="timeline-institution">Pendidikan Luar Biasa — Universitas Negeri Surabaya (UNESA)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Riwayat Karier -->
+          <div class="timeline-group" style="margin-top: 2rem;">
+            <h3 class="timeline-group-title">
+              <span>💼</span> Karier &amp; Jabatan
+            </h3>
+            <div class="timeline-list">
+              <div class="timeline-item">
+                <div class="timeline-period">2014 – Sekarang</div>
+                <div class="timeline-degree">Dosen &amp; Kepala Prodi S1 PLB</div>
+                <div class="timeline-institution">Dept. Pendidikan Luar Biasa, FIP UNESA</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-period">2011 – 2013</div>
+                <div class="timeline-degree">Guru Pendidikan Khusus</div>
+                <div class="timeline-institution">Sekolah Inklusi &amp; SLB, Surabaya</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Focus Section -->
+  <section id="research" class="section-pad bg-light" style="background-color: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="research_subtitle">Pilar Akademik</span>
+        <h2 class="section-title" data-i18n="research_title">Bidang Riset Utama</h2>
+        <p class="section-desc">Fokus riset dedikatif untuk mendorong aksesibilitas dan kesetaraan hak pendidikan bagi anak berkebutuhan khusus.</p>
+      </div>
+
+      <div class="research-grid" id="research-cards-container">
+        <!-- Card 1 -->
+        <div class="research-card">
+          <img src="assets/foto-profil.jpg" alt="Signalong Indonesia" class="research-bg-img">
+          <div class="research-bg-overlay"></div>
+          <div class="research-card-content">
+            <h3 class="research-title">Signalong Indonesia</h3>
+            <p class="research-desc">
+              Pengembangan sistem komunikasi berbasis kata kunci (keyword sign system) untuk anak dengan hambatan komunikasi, diadaptasi dari sistem Signalong Inggris untuk konteks Indonesia.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="research-card">
+          <img src="assets/foto-profil.jpg" alt="Pendidikan Inklusif" class="research-bg-img">
+          <div class="research-bg-overlay"></div>
+          <div class="research-card-content">
+            <h3 class="research-title">Pendidikan Inklusif</h3>
+            <p class="research-desc">
+              Riset komparatif lintas budaya mengenai sikap, persiapan pedagogis, dan persepsi guru terhadap pendidikan inklusif di Indonesia, Polandia, Jerman, Slovakia, dan Kamerun.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="research-card">
+          <img src="assets/foto-profil.jpg" alt="Pendidikan Tunarungu" class="research-bg-img">
+          <div class="research-bg-overlay"></div>
+          <div class="research-card-content">
+            <h3 class="research-title">Pendidikan Tunarungu</h3>
+            <p class="research-desc">
+              Strategi literasi, media pembelajaran visual (Big Books berbasis isyarat), dan pengembangan sarana komunikasi bagi peserta didik dengan hambatan pendengaran.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="research-card">
+          <img src="assets/foto-profil.jpg" alt="Anak Berkebutuhan Khusus" class="research-bg-img">
+          <div class="research-bg-overlay"></div>
+          <div class="research-card-content">
+            <h3 class="research-title">Anak Berkebutuhan Khusus</h3>
+            <p class="research-desc">
+              Intervensi berbasis bukti untuk anak dengan ADHD, autisme, disabilitas intelektual, serta strategi pengurangan risiko bencana (DRR) berbasis inklusi di pendidikan anak usia dini.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full-Page Flexible Video Showcase Section (Theme Matched) -->
+  <section id="video-showcase" class="full-video-section">
+    <div class="container full-video-container">
+      <div class="full-video-grid">
+        <!-- Left Video Thumbnail with Play Button -->
+        <div class="full-video-thumb-box" id="video-play-trigger">
+          <img src="assets/foto-profil.jpg" alt="Dokumentasi Signalong UNESA" class="full-thumb-img">
+          <div class="full-thumb-overlay"></div>
+          <div class="full-play-triangle">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="#1e40af"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+
+        <!-- Right Content Text -->
+        <div class="full-video-content">
+          <p class="full-video-tag">DOKUMENTASI RISET &amp; INOVASI</p>
+          <h2 class="full-video-title">
+            Signalong Indonesia<br>
+            <span>@ FIP UNESA, Surabaya</span><br>
+            <small>Riset &amp; Pengabdian 2026</small>
+          </h2>
+          <button class="full-video-btn" id="video-btn-trigger">PUTAR VIDEO</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section (Advanced Filter & Live Search - Paket Pro) -->
+  <section id="publications" class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Karya Ilmiah</span>
+        <h2 class="section-title">Publikasi &amp; Jurnal Terpilih</h2>
+        <p class="section-desc">Gunakan filter kategori dan pencarian langsung untuk menjelajahi 45+ artikel ilmiah bereputasi internasional.</p>
+      </div>
+
+      <!-- Pro Feature: Live Search & Category Filter Pills -->
+      <div class="pro-filter-container">
+        <div class="search-box-wrapper">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="pub-search-input" class="search-input" placeholder="Cari kata kunci judul paper atau jurnal...">
+        </div>
+
+        <div class="filter-pills-wrapper">
+          <button class="filter-btn active" data-filter="all">Semua (10)</button>
+          <button class="filter-btn" data-filter="scopus">Scopus &amp; Bereputasi</button>
+          <button class="filter-btn" data-filter="inclusive">Pendidikan Inklusif</button>
+          <button class="filter-btn" data-filter="signalong">Signalong Indonesia</button>
+        </div>
+      </div>
+
+      <!-- Publications Dynamic & Prerendered Grid Container -->
+      <div id="publications-grid-container" class="publications-grid">
+        <!-- Pub 1 -->
+        <div class="paper-card" data-type="scopus" data-title="professionalism multicultural preparation teaching teacher education">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-latest">2026</span>
+              <span class="journal-name">Teaching and Teacher Education</span>
+            </div>
+            <h3 class="paper-title">Professionalism, multicultural preparation, and pedagogical practice: A comparative study of pre-service teachers' experiences in Cameroon and Indonesia</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">International Journal (Scopus)</span>
+            <a href="https://www.researchgate.net/publication/408442632" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 2 -->
+        <div class="paper-card" data-type="scopus" data-title="bridging green building accessibility standards higher education sdgs">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-latest">2026</span>
+              <span class="journal-name">E3S Web of Conferences</span>
+            </div>
+            <h3 class="paper-title">Bridging green building and accessibility standards in Higher Education: Towards an inclusive campus framework for SDGs 10 and 11</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">Conference Proceeding (Scopus)</span>
+            <a href="https://www.researchgate.net/publication/401553915" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 3 -->
+        <div class="paper-card" data-type="scopus" data-title="inclusive disaster risk reduction education sign supported books kindergartens">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-latest">2025</span>
+              <span class="journal-name">Int. Journal of Inclusive Education</span>
+            </div>
+            <h3 class="paper-title">Inclusive disaster risk reduction education. Evaluating sign supported books for Indonesian kindergartens</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">Disaster &amp; PAUD (Scopus)</span>
+            <a href="https://www.researchgate.net/publication/395740885" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 4 -->
+        <div class="paper-card" data-type="inclusive" data-title="teachers attitudes towards inclusive education cultural context">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-mid">2024</span>
+              <span class="journal-name">Horyzonty Wychowania</span>
+            </div>
+            <h3 class="paper-title">Teachers' Attitudes Towards Inclusive Education in a Cultural Context</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">Cross-Cultural Study</span>
+            <a href="https://www.researchgate.net/publication/387596619" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 5 -->
+        <div class="paper-card" data-type="signalong" data-title="towards inclusive practice indonesian kindergartens sign supported big books">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-mid">2024</span>
+              <span class="journal-name">Journal of Early Childhood Research</span>
+            </div>
+            <h3 class="paper-title">Towards inclusive practice in Indonesian kindergartens: Evaluating the impact of Sign Supported Big Books</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">Signalong &amp; PAUD</span>
+            <a href="https://www.researchgate.net/publication/372945670" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 6 -->
+        <div class="paper-card" data-type="scopus" data-title="digital literacy perception inclusive education preservice teachers">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-mid">2024</span>
+              <span class="journal-name">Comm. in Comp. &amp; Info. Sci.</span>
+            </div>
+            <h3 class="paper-title">Digital Literacy and Perception of Inclusive Education of Preservice Teachers at Indonesian Universities</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">Digital Literacy (Scopus)</span>
+            <a href="https://www.researchgate.net/publication/381847299" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 7 -->
+        <div class="paper-card" data-type="inclusive" data-title="navigating learning differences mind mapping inclusivity science education">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-mid">2024</span>
+              <span class="journal-name">IJSE</span>
+            </div>
+            <h3 class="paper-title">Navigating Learning Differences: The Role of Mind Mapping in Fostering Inclusivity in Science Education</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">Special Education</span>
+            <a href="https://www.researchgate.net/publication/386441549" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 8 -->
+        <div class="paper-card" data-type="inclusive" data-title="inclusive education universitas negeri surabaya perceptions realities disabilities">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-mid">2023</span>
+              <span class="journal-name">IJSE</span>
+            </div>
+            <h3 class="paper-title">Inclusive education at Universitas Negeri Surabaya: Perceptions and realities of students with disabilities</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">Inclusive Campus</span>
+            <a href="https://www.researchgate.net/publication/375064291" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 9 -->
+        <div class="paper-card" data-type="signalong" data-title="fun benefits sign supported big books mainstream indonesian kindergartens">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-older">2021</span>
+              <span class="journal-name">Int. J. of Early Years Education</span>
+            </div>
+            <h3 class="paper-title">Fun and the benefits of Sign Supported Big Books in mainstream Indonesian kindergartens</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">Signalong Indonesia</span>
+            <a href="https://www.researchgate.net/publication/353458464" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+
+        <!-- Pub 10 -->
+        <div class="paper-card" data-type="scopus" data-title="cbt reduce hyperactive behaviors adolescents adhd">
+          <div>
+            <div class="paper-meta">
+              <span class="year-badge era-older">2021</span>
+              <span class="journal-name">iJOE</span>
+            </div>
+            <h3 class="paper-title">The Implementation of CBT to Reduce Hyperactive Behaviors among Adolescents with ADHD</h3>
+          </div>
+          <div class="paper-footer">
+            <span style="font-size: 0.8rem; color: var(--ink-3);">ADHD &amp; Therapy (Scopus)</span>
+            <a href="https://www.researchgate.net/publication/356638654" target="_blank" rel="noopener noreferrer" class="paper-link">Lihat Paper ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-cta-wrapper">
+        <a href="https://www.researchgate.net/profile/Khofidotur-Rofiah" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          Lihat Semua 45+ Publikasi di ResearchGate →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog & Catatan Akademik Section (Fitur Paket Pro) -->
+  <section id="blog" class="section-pad bg-light" style="background-color: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Catatan &amp; Opini Riset</span>
+        <h2 class="section-title">Blog Akademik</h2>
+        <p class="section-desc">Artikel ringkas mengenai perkembangan riset pendidikan inklusif, pengabdian masyarakat, dan catatan kepakaran.</p>
+      </div>
+
+      <div id="blog-grid-container" class="blog-grid">
+        <!-- Blog 1 -->
+        <article class="blog-card">
+          <div>
+            <div class="blog-meta">
+              <span class="badge">Signalong Indonesia</span>
+              <span>15 Mei 2026</span>
+            </div>
+            <h3 class="blog-title">Pentingnya Sistem Isyarat Kata Kunci (Signalong) dalam Komunikasi Anak Tunarungu</h3>
+            <p class="blog-summary">Bagaimana adaptasi metode Signalong dari Inggris membantu mempercepat pemahaman kosa kata anak dengan hambatan pendengaran dan komunikasi di TK inklusi Indonesia.</p>
+          </div>
+          <button class="blog-read-btn" data-id="post-1">Baca Selengkapnya →</button>
+        </article>
+
+        <!-- Blog 2 -->
+        <article class="blog-card">
+          <div>
+            <div class="blog-meta">
+              <span class="badge">Studi Komparatif</span>
+              <span>02 Februari 2026</span>
+            </div>
+            <h3 class="blog-title">Sikap Guru Terhadap Pendidikan Inklusif: Catatan Komparatif Indonesia dan Polandia</h3>
+            <p class="blog-summary">Refleksi dari disertasi doktor di Pedagogical University of Cracow mengenai perbedaan kultur, tantangan pedagogis, dan kesiapan fasilitas pendukung inklusi.</p>
+          </div>
+          <button class="blog-read-btn" data-id="post-2">Baca Selengkapnya →</button>
+        </article>
+
+        <!-- Blog 3 -->
+        <article class="blog-card">
+          <div>
+            <div class="blog-meta">
+              <span class="badge">Mitigasi Bencana</span>
+              <span>20 November 2025</span>
+            </div>
+            <h3 class="blog-title">Integrasi Pengurangan Risiko Bencana (DRR) di Sekolah Inklusi Usia Dini</h3>
+            <p class="blog-summary">Membangun kesiapsiagaan bencana bagi anak berkebutuhan khusus melalui media pembelajaran visual dan buku cerita berbasis isyarat.</p>
+          </div>
+          <button class="blog-read-btn" data-id="post-3">Baca Selengkapnya →</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeri & Pengabdian Section (Fitur Slider Landscape - Paket Pro) -->
+  <section id="gallery" class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle" data-i18n="gallery_subtitle">Dokumentasi Lapangan</span>
+        <h2 class="section-title" data-i18n="gallery_title">Galeri Kegiatan &amp; Pengabdian</h2>
+        <p class="section-desc">Dokumentasi riset lapangan, pengabdian masyarakat, dan kegiatan akademik internasional.</p>
+      </div>
+
+      <div class="gallery-slider-wrapper">
+        <button class="gallery-arrow prev-arrow" id="gal-prev" aria-label="Sebelumnya">&lsaquo;</button>
+        
+        <div id="gallery-grid-container" class="gallery-slider">
+          <!-- Item 1 -->
+          <div class="gallery-card">
+            <div class="gallery-img-wrapper">
+              <img src="assets/foto-profil.jpg" alt="Disertasi Doktoral" class="gallery-card-img">
+            </div>
+            <div class="gallery-card-body">
+              <h4>Disertasi Doktoral di Polandia</h4>
+              <p>Sidang disertasi Ph.D. di Pedagogical University of Cracow, Polandia (2024).</p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="gallery-card">
+            <div class="gallery-img-wrapper">
+              <img src="assets/foto-profil.jpg" alt="Workshop Signalong" class="gallery-card-img">
+            </div>
+            <div class="gallery-card-body">
+              <h4>Workshop Signalong Indonesia</h4>
+              <p>Pelatihan sistem komunikasi kata kunci bagi guru-guru sekolah inklusi di Surabaya.</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="gallery-card">
+            <div class="gallery-img-wrapper">
+              <img src="assets/foto-profil.jpg" alt="Pengajaran UNESA" class="gallery-card-img">
+            </div>
+            <div class="gallery-card-body">
+              <h4>Pengajaran di PLB UNESA</h4>
+              <p>Kegiatan perkuliahan dan bimbingan mahasiswa Departemen Pendidikan Luar Biasa FIP UNESA.</p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="gallery-card">
+            <div class="gallery-img-wrapper">
+              <img src="assets/foto-profil.jpg" alt="Konferensi Riset" class="gallery-card-img">
+            </div>
+            <div class="gallery-card-body">
+              <h4>Konferensi &amp; Seminar Riset</h4>
+              <p>Presentasi makalah ilmiah dalam seminar internasional pendidikan luar biasa.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="gallery-arrow next-arrow" id="gal-next" aria-label="Berikutnya">&rsaquo;</button>
+      </div>
+
+      <!-- Animated Pagination Dots -->
+      <div class="gallery-dots-container" id="gallery-dots"></div>
+    </div>
+  </section>
+
+  <!-- Academic Profiles Section -->
+  <section id="profiles" class="section-pad" style="background-color: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Jaringan Akademik</span>
+        <h2 class="section-title">Profil &amp; Database Riset</h2>
+        <p class="section-desc">Tautan langsung ke berbagai indeksasi riset dan direktori profil publik akademis.</p>
+      </div>
+
+      <div class="profiles-grid">
+        <!-- Google Scholar -->
+        <div class="profile-card" style="--platform-color: #4285F4;">
+          <div>
+            <div class="profile-header">
+              <div class="profile-icon-box">GS</div>
+              <h3 class="profile-name">Google Scholar</h3>
+            </div>
+            <p class="profile-stat">355+ Sitasi · H-Index &amp; i10-Index</p>
+          </div>
+          <a href="https://scholar.google.com/citations?user=hOzHm2EAAAAJ" target="_blank" rel="noopener noreferrer" class="profile-btn">Kunjungi Profil →</a>
+        </div>
+
+        <!-- ResearchGate -->
+        <div class="profile-card" style="--platform-color: #00D2FF;">
+          <div>
+            <div class="profile-header">
+              <div class="profile-icon-box">RG</div>
+              <h3 class="profile-name">ResearchGate</h3>
+            </div>
+            <p class="profile-stat">45 Publikasi · 12.602 Reads</p>
+          </div>
+          <a href="https://www.researchgate.net/profile/Khofidotur-Rofiah" target="_blank" rel="noopener noreferrer" class="profile-btn">Kunjungi Profil →</a>
+        </div>
+
+        <!-- Scopus -->
+        <div class="profile-card" style="--platform-color: #FF6B00;">
+          <div>
+            <div class="profile-header">
+              <div class="profile-icon-box">SC</div>
+              <h3 class="profile-name">Scopus</h3>
+            </div>
+            <p class="profile-stat">Author ID: 57196192608</p>
+          </div>
+          <a href="https://www.scopus.com/authid/detail.uri?authorId=57196192608" target="_blank" rel="noopener noreferrer" class="profile-btn">Kunjungi Profil →</a>
+        </div>
+
+        <!-- UNESA Scholar -->
+        <div class="profile-card" style="--platform-color: #003087;">
+          <div>
+            <div class="profile-header">
+              <div class="profile-icon-box">UN</div>
+              <h3 class="profile-name">UNESA Scholar</h3>
+            </div>
+            <p class="profile-stat">Profil Dosen Terverifikasi</p>
+          </div>
+          <a href="https://scholar.unesa.ac.id" target="_blank" rel="noopener noreferrer" class="profile-btn">Kunjungi Profil →</a>
+        </div>
+
+        <!-- Academia.edu -->
+        <div class="profile-card" style="--platform-color: #41454A;">
+          <div>
+            <div class="profile-header">
+              <div class="profile-icon-box">AC</div>
+              <h3 class="profile-name">Academia.edu</h3>
+            </div>
+            <p class="profile-stat">Paparan Publikasi &amp; Draf</p>
+          </div>
+          <a href="https://pascaunesa.academia.edu/khofidoturrofiah" target="_blank" rel="noopener noreferrer" class="profile-btn">Kunjungi Profil →</a>
+        </div>
+
+        <!-- SINTA Kemdikbud -->
+        <div class="profile-card" style="--platform-color: #C0392B;">
+          <div>
+            <div class="profile-header">
+              <div class="profile-icon-box">SI</div>
+              <h3 class="profile-name">SINTA Kemdikbud</h3>
+            </div>
+            <p class="profile-stat">SINTA ID: 6010778 · Terverifikasi</p>
+          </div>
+          <a href="https://sinta.kemdikbud.go.id/authors/profile/6010778" target="_blank" rel="noopener noreferrer" class="profile-btn">Kunjungi Profil →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section & Footer -->
+  <footer id="contact" class="contact-section">
+    <div class="container">
+      <div class="contact-box">
+        <span class="section-subtitle">Kolaborasi &amp; Diskusi</span>
+        <h2>Tertarik Berkolaborasi Riset?</h2>
+        <p>
+          Terbuka untuk kolaborasi riset antar perguruan tinggi, pembicara seminar, proyek intervensi inklusi, dan diskusi akademik seputar pendidikan luar biasa.
+        </p>
+
+        <div class="contact-actions">
+          <a href="mailto:khofidoturrofiah@unesa.ac.id" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Kirim Email Sekarang
+          </a>
+        </div>
+
+
+      </div>
+
+      <div class="site-footer">
+        <p>&copy; 2025 Dr. Khofidotur Rofiah, M.Pd., Ph.D. <span data-i18n="footer_copy">All rights reserved.</span> · Dibuat oleh <a href="https://portify-sepia.vercel.app/" target="_blank" rel="noopener noreferrer">Portify.id</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Blog Article Modal Reader (Fitur Paket Pro) -->
+  <div id="blog-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button id="modal-close-btn" class="modal-close" title="Tutup">&times;</button>
+      <div class="modal-header-meta">
+        <span id="modal-category" class="badge">Kategori</span>
+        <span id="modal-date" style="font-size: 0.85rem; color: var(--ink-3);">Tanggal</span>
+      </div>
+      <h2 id="modal-title" style="margin: 1rem 0; font-size: 1.75rem;">Judul Artikel</h2>
+      <div id="modal-body" class="modal-body-text">
+        <!-- Full content rendered by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Modal Player (Desain Apple Startup) -->
+  <div id="video-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content apple-video-modal-content">
+      <button id="video-modal-close" class="modal-close" title="Tutup">&times;</button>
+      <div class="video-iframe-container">
+        <iframe id="youtube-iframe" src="" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js?v=3"></script>
+</body>
+</html>
