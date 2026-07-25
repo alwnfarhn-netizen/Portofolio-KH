@@ -210,16 +210,46 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // Supabase Cloud Live Sync Credentials
+  // Supabase Cloud & BroadcastChannel Live Sync
   // ==========================================
   const SUPABASE_URL = 'https://uksp6rxubbaxca1fcaax.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_ukSp6RxUBBAXca1fcAAx_Q_ovbddB6h';
   const PORTFOLIO_SLUG = 'khofia';
 
+  // Instant Cross-Tab Live Sync Listener (Updates main page without page refresh)
+  if ('BroadcastChannel' in window) {
+    const channel = new BroadcastChannel('portfolio_cms_sync');
+    channel.onmessage = (event) => {
+      if (event.data && event.data.payload) {
+        appData = event.data.payload;
+        renderAllDynamicContent(appData);
+      }
+    };
+  }
+
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'portfolio_cms_data' && e.newValue) {
+      try {
+        appData = JSON.parse(e.newValue);
+        renderAllDynamicContent(appData);
+      } catch (err) {}
+    }
+  });
+
   // 1. Data Loader & Dynamic Renderer Engine (Supabase Cloud Sync First)
   loadAppData();
 
   async function loadAppData() {
+    // 1. Check LocalStorage first for instant instant render
+    const localSaved = localStorage.getItem('portfolio_cms_data');
+    if (localSaved) {
+      try {
+        appData = JSON.parse(localSaved);
+        renderAllDynamicContent(appData);
+      } catch (e) {}
+    }
+
+    // 2. Fetch Supabase Cloud DB for real-time cloud data across all devices
     if (SUPABASE_URL && SUPABASE_KEY) {
       try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/portfolios?slug=eq.${PORTFOLIO_SLUG}&select=content`, {
@@ -232,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const rows = await res.json();
           if (rows && rows.length > 0 && rows[0].content) {
             appData = rows[0].content;
+            localStorage.setItem('portfolio_cms_data', JSON.stringify(appData));
             renderAllDynamicContent(appData);
             return;
           }
@@ -241,16 +272,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const localSaved = localStorage.getItem('portfolio_cms_data');
-    if (localSaved) {
-      try {
-        appData = JSON.parse(localSaved);
-        renderAllDynamicContent(appData);
-        return;
-      } catch (e) {}
+    if (!localSaved) {
+      loadJSONContent();
     }
-
-    loadJSONContent();
   }
 
   function loadJSONContent() {

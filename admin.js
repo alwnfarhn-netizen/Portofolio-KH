@@ -262,10 +262,22 @@ function fetchLocalContentJSON() {
     });
 }
 
+function notifyCrossTabUpdate() {
+  if ('BroadcastChannel' in window) {
+    try {
+      const channel = new BroadcastChannel('portfolio_cms_sync');
+      channel.postMessage({ type: 'DATA_UPDATED', payload: cmsData });
+    } catch (e) {}
+  }
+}
+
 function saveAllChanges(silent = false) {
   localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
   updateLastSaved();
   updateJSONPreview();
+
+  // Broadcast live update across all open tabs on this browser
+  notifyCrossTabUpdate();
 
   // Async sync to Supabase Cloud DB
   syncToSupabaseCloud();
