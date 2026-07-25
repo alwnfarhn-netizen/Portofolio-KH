@@ -14,7 +14,7 @@ Website ini dibangun menggunakan arsitektur **Modern Vanilla Static Architecture
 ## 🔗 🌐 Live Demo & Portify Platform
 
 - 📌 **Live Website Portfolio:** [http://localhost:5500/](http://localhost:5500/)
-- ⚙️ **Admin CMS Portal:** [http://localhost:5500/admin.html](http://localhost:5500/admin.html) *(PIN Akses Default: `123456`)*
+- ⚙️ **Admin CMS Portal:** [http://localhost:5500/admin.html](http://localhost:5500/admin.html)
 - 🚀 **Built with Portify Platform:** [https://portify-sepia.vercel.app/](https://portify-sepia.vercel.app/)
 
 ---
