@@ -20,7 +20,7 @@
     "publications": "45+",
     "citations": "355+",
     "years": "10+",
-    "countries": "10"
+    "countries": "4"
   },
   "video": {
     "title": "Signalong Indonesia",
@@ -191,5 +191,11 @@
       "title": "Konferensi & Seminar Riset",
       "description": "Presentasi makalah ilmiah dalam seminar internasional pendidikan luar biasa."
     }
-  ]
+  ],
+  "contact": {
+    "title": "Tertarik Berkolaborasi Riset?",
+    "description": "Terbuka untuk kolaborasi riset antar perguruan tinggi, pembicara seminar, proyek intervensi inklusi, dan diskusi akademik seputar pendidikan luar biasa.",
+    "email": "khofidoturrofiah@unesa.ac.id",
+    "footerText": "© 2025 Khofidotur Rofiah, M.Pd., Ph.D. All rights reserved."
+  }
 }
