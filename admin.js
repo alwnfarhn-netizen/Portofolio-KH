@@ -184,6 +184,7 @@ function updateLastSaved() {
 
 document.addEventListener('DOMContentLoaded', () => {
   checkAdminAuth();
+  updateGitHubStatusUI();
   const localSaved = localStorage.getItem('portfolio_cms_data');
   if (localSaved) {
     try {
@@ -198,55 +199,117 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// Supabase Cloud Live Sync Credentials
+// GitHub REST API Direct Auto-Publish Engine
 // ==========================================
-const SUPABASE_URL = 'https://uksp6rxubbaxca1fcaax.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_ukSp6RxUBBAXca1fcAAx_Q_ovbddB6h';
-const PORTFOLIO_SLUG = 'khofia';
+function getGitHubConfig() {
+  return {
+    token: localStorage.getItem('portfolio_github_token') || '',
+    repo: localStorage.getItem('portfolio_github_repo') || 'alwnfarhn-netizen/Portofolio-KH',
+    branch: localStorage.getItem('portfolio_github_branch') || 'main',
+    path: localStorage.getItem('portfolio_github_path') || 'data/content.json'
+  };
+}
 
-async function syncToSupabaseCloud() {
-  if (!SUPABASE_URL || !SUPABASE_KEY) return;
+function saveGitHubConfigForm(e) {
+  if (e) e.preventDefault();
+  const token = document.getElementById('gh-token')?.value.trim() || '';
+  const repo = document.getElementById('gh-repo')?.value.trim() || 'alwnfarhn-netizen/Portofolio-KH';
+  const branch = document.getElementById('gh-branch')?.value.trim() || 'main';
+  const path = document.getElementById('gh-path')?.value.trim() || 'data/content.json';
+
+  localStorage.setItem('portfolio_github_token', token);
+  localStorage.setItem('portfolio_github_repo', repo);
+  localStorage.setItem('portfolio_github_branch', branch);
+  localStorage.setItem('portfolio_github_path', path);
+
+  updateGitHubStatusUI();
+  cmsAlert('🔐 Pengaturan GitHub Auto-Publish berhasil disimpan!', 'success');
+}
+
+function updateGitHubStatusUI() {
+  const config = getGitHubConfig();
+  const badge = document.getElementById('gh-status-badge');
+  const tokenInput = document.getElementById('gh-token');
+  const repoInput = document.getElementById('gh-repo');
+  const branchInput = document.getElementById('gh-branch');
+  const pathInput = document.getElementById('gh-path');
+
+  if (tokenInput) tokenInput.value = config.token;
+  if (repoInput) repoInput.value = config.repo;
+  if (branchInput) branchInput.value = config.branch;
+  if (pathInput) pathInput.value = config.path;
+
+  if (badge) {
+    if (config.token) {
+      badge.className = 'badge-live';
+      badge.style.background = '#ecfdf5';
+      badge.style.color = '#047857';
+      badge.style.borderColor = '#a7f3d0';
+      badge.innerText = '🟢 GitHub Auto-Publish Terhubung';
+    } else {
+      badge.className = 'badge-live';
+      badge.style.background = '#fff7ed';
+      badge.style.color = '#c2410c';
+      badge.style.borderColor = '#fed7aa';
+      badge.innerText = '⚪ Mode Manual (Download content.json)';
+    }
+  }
+}
+
+async function syncToGitHubCloud() {
+  const config = getGitHubConfig();
+  if (!config.token) return { success: false, reason: 'no_token' };
+
   try {
-    await fetch(`${SUPABASE_URL}/rest/v1/portfolios`, {
-      method: 'POST',
+    const targetPath = config.path || 'data/content.json';
+    const apiUrl = `https://api.github.com/repos/${config.repo}/contents/${targetPath}`;
+    
+    // 1. Get existing file SHA if file exists on repo
+    let sha = '';
+    const getRes = await fetch(`${apiUrl}?ref=${config.branch}`, {
       headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'resolution=merge-duplicates'
+        'Authorization': `token ${config.token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    if (getRes.ok) {
+      const fileData = await getRes.json();
+      sha = fileData.sha;
+    }
+
+    // 2. Encode JSON content to UTF-8 Base64
+    const jsonString = JSON.stringify(cmsData, null, 2);
+    const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
+
+    // 3. Push commit to GitHub
+    const putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${config.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        slug: PORTFOLIO_SLUG,
-        content: cmsData,
-        updated_at: new Date().toISOString()
+        message: 'update: publish data/content.json via Admin CMS',
+        content: base64Content,
+        branch: config.branch,
+        ...(sha ? { sha } : {})
       })
     });
+
+    if (putRes.ok) {
+      return { success: true };
+    } else {
+      const errJson = await putRes.json();
+      return { success: false, reason: errJson.message || 'HTTP error ' + putRes.status };
+    }
   } catch (err) {
-    console.warn('Supabase cloud sync:', err);
+    return { success: false, reason: err.message };
   }
 }
 
 function loadDefaultJSON() {
-  if (SUPABASE_URL && SUPABASE_KEY) {
-    fetch(`${SUPABASE_URL}/rest/v1/portfolios?slug=eq.${PORTFOLIO_SLUG}&select=content`, {
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`
-      }
-    })
-    .then(res => res.json())
-    .then(rows => {
-      if (rows && rows.length > 0 && rows[0].content) {
-        cmsData = rows[0].content;
-        renderAll();
-        return;
-      }
-      fetchLocalContentJSON();
-    })
-    .catch(() => fetchLocalContentJSON());
-  } else {
-    fetchLocalContentJSON();
-  }
+  fetchLocalContentJSON();
 }
 
 function fetchLocalContentJSON() {
@@ -271,19 +334,31 @@ function notifyCrossTabUpdate() {
   }
 }
 
-function saveAllChanges(silent = false) {
+async function saveAllChanges(silent = false) {
   localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
   updateLastSaved();
   updateJSONPreview();
-
-  // Broadcast live update across all open tabs on this browser
   notifyCrossTabUpdate();
 
-  // Async sync to Supabase Cloud DB
-  syncToSupabaseCloud();
-
-  if (!silent) {
-    cmsAlert('Perubahan Anda telah disimpan dan langsung aktif terhubung live di seluruh dunia!', 'success');
+  const ghConfig = getGitHubConfig();
+  if (ghConfig.token) {
+    if (!silent) {
+      cmsAlert('⌛ Menyimpan lokal & mengirim pembaruan langsung ke GitHub Vercel...', 'info');
+    }
+    const result = await syncToGitHubCloud();
+    if (result.success) {
+      if (!silent) {
+        cmsAlert('🚀 Sukses Publish Live!\n\nPerubahan berhasil di-push ke GitHub (' + ghConfig.repo + '). Vercel sedang memperbarui khofia.vercel.app (otomatis aktif dalam 10-15 detik)!', 'success');
+      }
+    } else {
+      if (!silent) {
+        cmsAlert('⚠️ Perubahan tersimpan di browser ini (preview lokal aktif), tetapi gagal publish ke GitHub:\n\n' + result.reason + '\n\nAnda dapat mengunduh berkas content.json dan mengunggahnya manual ke GitHub.', 'danger');
+      }
+    }
+  } else {
+    if (!silent) {
+      cmsAlert('💾 Perubahan tersimpan di browser ini (preview lokal aktif)!\n\n💡 Catatan untuk update website utama (khofia.vercel.app):\n1. Masukkan Token GitHub pada tab "Simpan & Export" untuk Auto-Publish ke Vercel, ATAU\n2. Klik "Download content.json Terbaru" dan unggah file ke GitHub repo (alwnfarhn-netizen/Portofolio-KH).', 'success');
+    }
   }
 }
 

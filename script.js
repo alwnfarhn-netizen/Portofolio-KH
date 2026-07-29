@@ -210,21 +210,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // Supabase Cloud & BroadcastChannel Live Sync
+  // Cross-Tab Live Sync & Data Engine
   // ==========================================
-  const SUPABASE_URL = 'https://uksp6rxubbaxca1fcaax.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_ukSp6RxUBBAXca1fcAAx_Q_ovbddB6h';
-  const PORTFOLIO_SLUG = 'khofia';
-
+  
   // Instant Cross-Tab Live Sync Listener (Updates main page without page refresh)
   if ('BroadcastChannel' in window) {
-    const channel = new BroadcastChannel('portfolio_cms_sync');
-    channel.onmessage = (event) => {
-      if (event.data && event.data.payload) {
-        appData = event.data.payload;
-        renderAllDynamicContent(appData);
-      }
-    };
+    try {
+      const channel = new BroadcastChannel('portfolio_cms_sync');
+      channel.onmessage = (event) => {
+        if (event.data && event.data.payload) {
+          appData = event.data.payload;
+          renderAllDynamicContent(appData);
+        }
+      };
+    } catch(e) {}
   }
 
   window.addEventListener('storage', (e) => {
@@ -236,11 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 1. Data Loader & Dynamic Renderer Engine (Supabase Cloud Sync First)
+  // 1. Data Loader & Dynamic Renderer Engine
   loadAppData();
 
   async function loadAppData() {
-    // 1. Check LocalStorage first for instant instant render
+    // A. Check LocalStorage first for instant local rendering (admin preview)
     const localSaved = localStorage.getItem('portfolio_cms_data');
     if (localSaved) {
       try {
@@ -249,42 +248,20 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (e) {}
     }
 
-    // 2. Fetch Supabase Cloud DB for real-time cloud data across all devices
-    if (SUPABASE_URL && SUPABASE_KEY) {
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/portfolios?slug=eq.${PORTFOLIO_SLUG}&select=content`, {
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`
-          }
-        });
-        if (res.ok) {
-          const rows = await res.json();
-          if (rows && rows.length > 0 && rows[0].content) {
-            appData = rows[0].content;
-            localStorage.setItem('portfolio_cms_data', JSON.stringify(appData));
-            renderAllDynamicContent(appData);
-            return;
-          }
+    // B. Fetch fresh data/content.json with cache busting to get published production content
+    try {
+      const res = await fetch(`data/content.json?v=${Date.now()}`, { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        // If user has no local override, apply published content
+        if (!localSaved) {
+          appData = data;
+          renderAllDynamicContent(data);
         }
-      } catch (err) {
-        console.warn('Supabase fetch fallback:', err);
       }
+    } catch (err) {
+      console.log('Using fallback content');
     }
-
-    if (!localSaved) {
-      loadJSONContent();
-    }
-  }
-
-  function loadJSONContent() {
-    fetch('data/content.json')
-      .then(res => res.json())
-      .then(data => {
-        appData = data;
-        renderAllDynamicContent(data);
-      })
-      .catch(err => console.log('Using static content'));
   }
 
   function renderAllDynamicContent(data) {

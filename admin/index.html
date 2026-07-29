@@ -890,12 +890,51 @@
 
       <!-- TAB 6: Export & Save -->
       <div id="tab-export" class="tab-content" style="display: none;">
+
+        <!-- GITHUB AUTO-PUBLISH CARD -->
+        <div class="admin-card" style="border-color: #10b981; background: #f0fdf4;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h2 style="font-size: 1.35rem; color: #065f46;">🚀 GitHub Direct Auto-Publish ke Vercel</h2>
+            <span id="gh-status-badge" class="badge-live" style="background: #fff7ed; color: #c2410c; border-color: #fed7aa;">⚪ Mode Manual (Download content.json)</span>
+          </div>
+          <p style="color: #334155; font-size: 0.9rem; margin-bottom: 1.25rem; line-height: 1.6;">
+            Hubungkan CMS ini langsung ke GitHub repository <code>alwnfarhn-netizen/Portofolio-KH</code>. Ketika Anda klik <strong>Simpan Perubahan</strong>, CMS akan langsung mengunggah <code>content.json</code> ke GitHub dan men-trigger <strong>Vercel</strong> untuk memperbarui website <strong>khofia.vercel.app</strong> secara otomatis dalam ~10-15 detik!
+          </p>
+
+          <form onsubmit="saveGitHubConfigForm(event)" style="background: #ffffff; border: 1px solid #bbf7d0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem;">
+            <div class="form-group">
+              <label style="font-weight: 700; color: #0f172a;">GitHub Personal Access Token (PAT)</label>
+              <input type="password" id="gh-token" class="form-control" placeholder="ghp_xxxxxxxxxxxx atau github_pat_xxxxxxxxxxxx" autocomplete="off">
+              <small style="color: #64748b; font-size: 0.8rem; display: block; margin-top: 0.3rem;">
+                Dapatkan token di <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer" style="color: #2563eb; font-weight: 600;">GitHub Settings &rarr; Developer Settings &rarr; Personal Access Tokens</a> (Pilih <strong>repo</strong> access). Token tersimpan aman di browser Anda.
+              </small>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 1rem; margin-bottom: 1rem;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label>Repository GitHub</label>
+                <input type="text" id="gh-repo" class="form-control" value="alwnfarhn-netizen/Portofolio-KH" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label>Branch</label>
+                <input type="text" id="gh-branch" class="form-control" value="main" required>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label>Path File Data</label>
+                <input type="text" id="gh-path" class="form-control" value="data/content.json" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success" style="padding: 0.65rem 1.25rem; font-weight: 700;">💾 Simpan Token &amp; Hubungkan GitHub</button>
+          </form>
+        </div>
+
         <div class="admin-card" style="border-color: #2563eb;">
           <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Export &amp; Download data/content.json</h2>
           <p style="color: #64748b; margin-bottom: 1.5rem;">Perubahan Anda tersimpan otomatis secara instan. Download berkas <code>content.json</code> jika ingin menyimpan secara permanen ke server/GitHub saat deploy.</p>
           
           <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-            <button onclick="saveAllChanges()" class="btn btn-success" style="padding: 0.85rem 1.75rem; font-size: 1rem; font-weight: 700;">Simpan Perubahan Langsung</button>
+            <button onclick="saveAllChanges()" class="btn btn-success" style="padding: 0.85rem 1.75rem; font-size: 1rem; font-weight: 700;">Simpan &amp; Publish Sekarang</button>
             <button onclick="downloadJSON()" class="btn btn-primary" style="padding: 0.85rem 1.75rem; font-size: 1rem; font-weight: 700;">Download content.json Terbaru</button>
             <button onclick="copyJSON()" class="btn btn-outline" style="padding: 0.85rem 1.75rem; font-size: 1rem; font-weight: 700; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">Copy JSON ke Clipboard</button>
           </div>
