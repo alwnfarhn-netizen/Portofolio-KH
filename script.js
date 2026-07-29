@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timeline_exp: "Karier & Jabatan",
       research_subtitle: "Pilar Akademik",
       research_title: "Bidang Riset Utama",
+      research_desc: "Fokus riset dedikatif untuk mendorong aksesibilitas dan kesetaraan hak pendidikan bagi anak berkebutuhan khusus.",
       video_tag: "DOKUMENTASI RISET & INOVASI",
       video_title: "Signalong Indonesia",
       video_sub: "@ FIP UNESA, Surabaya",
@@ -36,19 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
       video_btn: "PUTAR VIDEO",
       pub_subtitle: "Karya Ilmiah",
       pub_title: "Publikasi & Jurnal Terpilih",
+      pub_desc: "Gunakan filter kategori dan pencarian langsung untuk menjelajahi 45+ artikel ilmiah bereputasi internasional.",
       pub_search_placeholder: "Cari kata kunci judul paper atau jurnal...",
       pub_cta_btn: "Lihat Semua 45+ Publikasi di ResearchGate →",
       filter_all: "Semua",
       filter_scopus: "Scopus & Bereputasi",
       filter_inclusive: "Pendidikan Inklusif",
       filter_signalong: "Signalong Indonesia",
+      paper_view_link: "Lihat Paper ↗",
       blog_subtitle: "Catatan & Opini Riset",
       blog_title: "Blog Akademik",
+      blog_desc: "Artikel ringkas mengenai perkembangan riset pendidikan inklusif, pengabdian masyarakat, dan catatan kepakaran.",
       blog_read_btn: "Baca Selengkapnya →",
       gallery_subtitle: "Dokumentasi Lapangan",
       gallery_title: "Galeri Kegiatan & Pengabdian",
+      gallery_desc: "Dokumentasi riset lapangan, pengabdian masyarakat, dan kegiatan akademik internasional.",
       profiles_subtitle: "Jaringan Akademik",
       profiles_title: "Profil & Database Riset",
+      profiles_desc: "Tautan langsung ke berbagai indeksasi riset dan direktori profil publik akademis.",
+      profile_visit_btn: "Kunjungi Profil →",
       contact_subtitle: "Kolaborasi & Diskusi",
       contact_title: "Tertarik Berkolaborasi Riset?",
       contact_desc: "Terbuka untuk kolaborasi riset antar perguruan tinggi, pembicara seminar, proyek intervensi inklusi, dan diskusi akademik seputar pendidikan luar biasa.",
@@ -82,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timeline_exp: "Career & Leadership",
       research_subtitle: "Academic Pillars",
       research_title: "Main Research Areas",
+      research_desc: "Dedicated research focus to promote accessibility and equal rights to education for children with special needs.",
       video_tag: "RESEARCH & INNOVATION DOCUMENTARY",
       video_title: "Signalong Indonesia",
       video_sub: "@ FIP UNESA, Surabaya",
@@ -89,19 +97,25 @@ document.addEventListener('DOMContentLoaded', () => {
       video_btn: "PLAY VIDEO",
       pub_subtitle: "Scholarly Works",
       pub_title: "Featured Publications & Journals",
+      pub_desc: "Use category filters and live search to explore 45+ internationally reputable scientific papers.",
       pub_search_placeholder: "Search paper title or journal keywords...",
       pub_cta_btn: "View All 45+ Publications on ResearchGate →",
       filter_all: "All",
       filter_scopus: "Scopus & Reputable",
       filter_inclusive: "Inclusive Education",
       filter_signalong: "Signalong Indonesia",
+      paper_view_link: "View Paper ↗",
       blog_subtitle: "Notes & Research Insights",
       blog_title: "Academic Blog",
+      blog_desc: "Concise articles on inclusive education research developments, community service, and expert insights.",
       blog_read_btn: "Read Full Article →",
       gallery_subtitle: "Field Documentation",
       gallery_title: "Activities & Community Outreach",
+      gallery_desc: "Documentation of field research, community service, and international academic activities.",
       profiles_subtitle: "Academic Networks",
       profiles_title: "Profiles & Research Databases",
+      profiles_desc: "Direct links to various research indexings and academic public profile directories.",
+      profile_visit_btn: "Visit Profile →",
       contact_subtitle: "Collaboration & Inquiries",
       contact_title: "Interested in Research Collaboration?",
       contact_desc: "Open for inter-university research collaborations, keynote speaking, inclusive intervention projects, and academic inquiries regarding special education.",
@@ -138,6 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('pub-search-input');
     if (searchInput && i18nData[lang]['pub_search_placeholder']) {
       searchInput.placeholder = i18nData[lang]['pub_search_placeholder'];
+    }
+
+    // Dynamic buttons translation
+    if (i18nData[lang]) {
+      document.querySelectorAll('.paper-link').forEach(el => el.innerText = i18nData[lang].paper_view_link);
+      document.querySelectorAll('.profile-btn').forEach(el => el.innerText = i18nData[lang].profile_visit_btn);
+      document.querySelectorAll('.blog-read-btn').forEach(el => el.innerText = i18nData[lang].blog_read_btn);
     }
   }
 
