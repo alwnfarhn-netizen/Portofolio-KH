@@ -229,6 +229,7 @@ function saveGitHubConfigForm(e) {
 function updateGitHubStatusUI() {
   const config = getGitHubConfig();
   const badge = document.getElementById('gh-status-badge');
+  const topBadge = document.getElementById('top-status-badge');
   const tokenInput = document.getElementById('gh-token');
   const repoInput = document.getElementById('gh-repo');
   const branchInput = document.getElementById('gh-branch');
@@ -239,8 +240,10 @@ function updateGitHubStatusUI() {
   if (branchInput) branchInput.value = config.branch;
   if (pathInput) pathInput.value = config.path;
 
+  const isConnected = Boolean(config.token && config.token.trim());
+
   if (badge) {
-    if (config.token) {
+    if (isConnected) {
       badge.className = 'badge-live';
       badge.style.background = '#ecfdf5';
       badge.style.color = '#047857';
@@ -252,6 +255,22 @@ function updateGitHubStatusUI() {
       badge.style.color = '#c2410c';
       badge.style.borderColor = '#fed7aa';
       badge.innerText = '⚪ Mode Manual (Download content.json)';
+    }
+  }
+
+  if (topBadge) {
+    if (isConnected) {
+      topBadge.className = 'badge-live';
+      topBadge.style.background = '#ecfdf5';
+      topBadge.style.color = '#047857';
+      topBadge.style.borderColor = '#a7f3d0';
+      topBadge.innerText = '🟢 GitHub Auto-Publish Aktif (Update Otomatis ke khofia.vercel.app)';
+    } else {
+      topBadge.className = 'badge-live';
+      topBadge.style.background = '#fff7ed';
+      topBadge.style.color = '#c2410c';
+      topBadge.style.borderColor = '#fed7aa';
+      topBadge.innerText = '🟠 Mode Preview Lokal (Token GitHub Belum Diisi)';
     }
   }
 }
