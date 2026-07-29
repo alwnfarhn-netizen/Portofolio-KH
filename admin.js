@@ -24,7 +24,7 @@ function sanitizeURL(url) {
 const DEFAULT_PIN = '123456';
 
 function getAdminPIN() {
-  return localStorage.getItem('portfolio_admin_pin') || DEFAULT_PIN;
+  return localStorage.getItem('portfolio_cms_pin') || localStorage.getItem('portfolio_admin_pin') || DEFAULT_PIN;
 }
 
 function checkAdminAuth() {

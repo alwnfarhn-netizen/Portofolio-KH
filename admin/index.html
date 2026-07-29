@@ -513,6 +513,34 @@
 </head>
 <body>
 
+  <!-- CMS Security PIN Lock Screen Overlay -->
+  <div id="cms-lock-screen" style="position: fixed; inset: 0; z-index: 99999; background: #0f172a; display: flex; align-items: center; justify-content: center; padding: 1.5rem; backdrop-filter: blur(8px);">
+    <div style="background: #1e293b; border: 1px solid #334155; border-radius: 20px; padding: 2.5rem 2rem; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+      <div style="width: 70px; height: 70px; background: rgba(37, 99, 235, 0.15); border: 2px solid rgba(56, 189, 248, 0.3); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 1.25rem;">
+        🔐
+      </div>
+      <h2 style="color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Keamanan Admin CMS</h2>
+      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.75rem;">Masukkan PIN Sandi Keamanan untuk mengakses Dasbor Pengelola Portofolio.</p>
+
+      <form onsubmit="event.preventDefault(); verifyAdminPIN();">
+        <div style="margin-bottom: 1.25rem; text-align: left;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">PIN Sandi (Default: 123456)</label>
+          <input type="password" id="admin-pin-input" class="form-control" placeholder="• • • • • •" required autofocus style="width: 100%; padding: 0.85rem 1rem; font-size: 1.25rem; letter-spacing: 0.3em; text-align: center; background: #0f172a; border: 1px solid #334155; color: #ffffff; border-radius: 12px;">
+        </div>
+
+        <div id="admin-pin-error" style="display: none; background: rgba(225, 29, 72, 0.15); border: 1px solid rgba(225, 29, 72, 0.4); color: #f43f5e; font-size: 0.85rem; font-weight: 600; padding: 0.65rem 1rem; border-radius: 10px; margin-bottom: 1.25rem;"></div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem 1.5rem; font-size: 1rem; font-weight: 700; border-radius: 12px; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: pointer; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);">
+          🔓 Masuk ke Dasbor Admin
+        </button>
+      </form>
+
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #334155; font-size: 0.8rem; color: #64748b;">
+        <span>Kembali ke <a href="/" style="color: #38bdf8; text-decoration: none; font-weight: 600;">Website Utama</a></span>
+      </div>
+    </div>
+  </div>
+
   <!-- Admin Mobile Header (visible on mobile only) -->
   <header class="admin-mobile-header" id="admin-mobile-header">
     <span class="admin-mobile-brand">Admin CMS</span>
