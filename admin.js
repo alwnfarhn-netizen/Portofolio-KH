@@ -1256,3 +1256,34 @@ async function copyJSON() {
   }
   await cmsAlert('Kode JSON berhasil disalin ke Clipboard!', 'success');
 }
+
+async function changeAdminPIN(e) {
+  e.preventDefault();
+  const currentPin = document.getElementById('current-pin').value;
+  const newPin = document.getElementById('new-pin').value;
+  const confirmPin = document.getElementById('confirm-pin').value;
+
+  const savedPin = localStorage.getItem('portfolio_cms_pin') || '123456';
+
+  if (currentPin !== savedPin) {
+    cmsAlert('❌ PIN saat ini salah. Silakan coba lagi.', 'danger');
+    return;
+  }
+
+  if (newPin !== confirmPin) {
+    cmsAlert('⚠️ PIN Baru dan Konfirmasi PIN tidak cocok.', 'warning');
+    return;
+  }
+
+  if (newPin.length < 4) {
+    cmsAlert('⚠️ PIN minimal harus 4 karakter.', 'warning');
+    return;
+  }
+
+  localStorage.setItem('portfolio_cms_pin', newPin);
+  document.getElementById('current-pin').value = '';
+  document.getElementById('new-pin').value = '';
+  document.getElementById('confirm-pin').value = '';
+
+  cmsAlert('🔐 PIN Keamanan CMS berhasil diperbarui!', 'success');
+}

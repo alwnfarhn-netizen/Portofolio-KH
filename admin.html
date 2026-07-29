@@ -46,6 +46,7 @@
       left: 0;
       z-index: 100;
       padding: 1.5rem 1rem;
+      overflow-y: auto;
     }
 
     .sidebar-brand {
@@ -79,6 +80,8 @@
       flex-direction: column;
       gap: 0.4rem;
       flex: 1;
+      overflow-y: auto;
+      padding-right: 4px;
     }
 
     .sidebar-tab-btn {
@@ -1146,7 +1149,29 @@
           <div class="form-group">
             <label>Pratinjau Kode JSON (Preview Data)</label>
             <textarea id="json-preview" class="form-control" style="min-height: 350px; font-family: monospace; font-size: 0.85rem; background: #f8fafc;" readonly></textarea>
-          </div>
+      </div>
+
+      <!-- TAB 6.5: Keamanan PIN -->
+      <div id="tab-security" class="tab-content" style="display: none;">
+        <div class="admin-card" style="border-color: #38bdf8;">
+          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #0284c7;">🔒 Kelola Keamanan PIN CMS</h2>
+          <p style="color: #64748b; margin-bottom: 1.5rem;">Ubah PIN akses masuk ke Dasbor Admin CMS ini untuk menjaga keamanan data portofolio Anda.</p>
+          
+          <form onsubmit="changeAdminPIN(event)" style="max-width: 450px;">
+            <div class="form-group">
+              <label style="font-weight: 600;">PIN Saat Ini</label>
+              <input type="password" id="current-pin" class="form-control" placeholder="Masukkan PIN saat ini (Default: 123456)" required>
+            </div>
+            <div class="form-group">
+              <label style="font-weight: 600;">PIN Baru</label>
+              <input type="password" id="new-pin" class="form-control" placeholder="Masukkan PIN baru" required minlength="4">
+            </div>
+            <div class="form-group">
+              <label style="font-weight: 600;">Konfirmasi PIN Baru</label>
+              <input type="password" id="confirm-pin" class="form-control" placeholder="Ulangi PIN baru" required minlength="4">
+            </div>
+            <button type="submit" class="btn btn-primary" style="padding: 0.75rem 1.5rem; font-weight: 700;">🔒 Perbarui PIN Keamanan</button>
+          </form>
         </div>
       </div>
 
