@@ -5,7 +5,7 @@
 ![Bilingual](https://img.shields.io/badge/Language-Bilingual%20ID%20%7C%20EN-6366f1?style=for-the-badge)
 ![Deployment](https://img.shields.io/badge/Deploy-Vercel%20Zero--Config-000000?style=for-the-badge&logo=vercel)
 
-Selamat datang di repositori resmi website portofolio akademik berstandar internasional dan sistem pengelola konten **Admin CMS Live Mode** untuk **Dr. Khofidotur Rofiah, M.Pd., Ph.D.** (Kepala Program Studi & Dosen Pendidikan Luar Biasa, Universitas Negeri Surabaya).
+Selamat datang di repositori resmi website portofolio akademik berstandar internasional dan sistem pengelola konten **Admin CMS Live Mode** untuk **Dr. Khofidotur Rofiah, M.Pd., Ph.D.** (Dosen Pendidikan Luar Biasa, Universitas Negeri Surabaya).
 
 Website ini dibangun menggunakan arsitektur **Modern Vanilla Static Architecture** dengan performa maksimal, keamanan berlapis dari serangan siber, sistem penerjemahan bilingual *real-time*, serta pengelola konten visual tanpa perlu ngoding (*Zero-Code CMS*).
 
@@ -14,7 +14,7 @@ Website ini dibangun menggunakan arsitektur **Modern Vanilla Static Architecture
 ## 🔗 🌐 Live Production Website & Portify Platform
 
 - 📌 **Live Website Portfolio:** [https://khofia.vercel.app/](https://khofia.vercel.app/)
-- ⚙️ **Admin CMS Portal:** [https://khofia.vercel.app/admin.html](https://khofia.vercel.app/admin.html) *(PIN Akses Default: `123456`)*
+- ⚙️ **Admin CMS Portal:** [https://khofia.vercel.app/admin.html](https://khofia.vercel.app/admin.html) 
 - 🚀 **Built with Portify Platform:** [https://portify-sepia.vercel.app/](https://portify-sepia.vercel.app/)
 
 ---
@@ -68,7 +68,7 @@ Admin CMS dilengkapi sistem perlindungan berlapis untuk memastikan data portofol
 
 ### 1. Masuk ke Dasbor Admin
 1. Buka **`admin.html`** di browser.
-2. Masukkan **PIN Akses Admin**: `123456`.
+2. Masukkan **PIN Akses Admin**:
 3. Klik **`Masuk ke Dasbor Admin 🔓`**.
 
 ### 2. Mengelola Konten
