@@ -1,11 +1,17 @@
 {
   "profile": {
-    "name": "Khofidotur Rofiah, M.Pd., Ph.D.",
-    "subtitle": "Dosen Pendidikan Luar Biasa",
+    "name": "Dr. Khofidotur Rofiah, M.Pd., Ph.D.",
+    "subtitle": "Kepala Prodi & Dosen Pendidikan Luar Biasa",
     "institution": "Universitas Negeri Surabaya (UNESA)",
     "tagline": "Peneliti Pendidikan Inklusif & Pendidikan Luar Biasa. Berfokus pada intervensi komunikasi (Signalong Indonesia), sikap guru lintas budaya, dan hak disabilitas.",
     "avatar": "assets/foto-profil-nobg.png",
     "email": "khofidoturrofiah@unesa.ac.id",
+    "badgeText": "Fakultas Ilmu Pendidikan · UNESA",
+    "doctorDegree": "Gelar Doktor (Ph.D.)",
+    "doctorUniv": "Pedagogical Univ. of Cracow",
+    "aboutBio1": "Dr. Khofidotur Rofiah adalah dosen dan peneliti di Departemen Pendidikan Luar Biasa, Universitas Negeri Surabaya (UNESA) sejak 2014. Sebelum bergabung dengan UNESA, beliau berkarier sebagai guru pendidikan khusus di sekolah-sekolah penyelenggara pendidikan inklusif di Surabaya (2011–2013).",
+    "aboutBio2": "Beliau menyelesaikan studi doktoral di Pedagogical University of Cracow, Polandia (2020–2024) dengan disertasi tentang sikap guru terhadap pendidikan inklusif di Indonesia dan Polandia. Saat ini fokus risetnya mencakup pengembangan sistem komunikasi berbasis kata kunci untuk anak dengan hambatan komunikasi (Signalong Indonesia), pendidikan inklusif lintas budaya, dan pendidikan untuk anak berkebutuhan khusus.",
+    "skills": "Pendidikan Inklusif, Pendidikan Luar Biasa, Signalong Indonesia, Pendidikan Tunarungu, Intervensi ADHD & Autisme, Literasi Digital",
     "scholar": "https://scholar.google.com/citations?user=hOzHm2EAAAAJ",
     "researchgate": "https://www.researchgate.net/profile/Khofidotur-Rofiah",
     "scopus": "https://www.scopus.com/authid/detail.uri?authorId=57196192608"
@@ -15,6 +21,45 @@
     "citations": "355+",
     "years": "10+",
     "countries": "4"
+  },
+  "timelines": {
+    "education": [
+      {
+        "id": "edu-1",
+        "period": "2020 – 2024",
+        "degree": "Doctor of Philosophy (Ph.D.)",
+        "institution": "Pedagogical University of Cracow, Polandia",
+        "detail": "Disertasi: Teachers' attitudes toward inclusive education between Poland and Indonesia"
+      },
+      {
+        "id": "edu-2",
+        "period": "S2",
+        "degree": "Magister Pendidikan (M.Pd.)",
+        "institution": "Pendidikan Luar Biasa — Universitas Negeri Surabaya (UNESA)",
+        "detail": ""
+      },
+      {
+        "id": "edu-3",
+        "period": "S1",
+        "degree": "Sarjana Pendidikan (S.Pd.)",
+        "institution": "Pendidikan Luar Biasa — Universitas Negeri Surabaya (UNESA)",
+        "detail": ""
+      }
+    ],
+    "career": [
+      {
+        "id": "car-1",
+        "period": "2014 – Sekarang",
+        "role": "Dosen & Kepala Prodi S1 PLB",
+        "institution": "Dept. Pendidikan Luar Biasa, FIP UNESA"
+      },
+      {
+        "id": "car-2",
+        "period": "2011 – 2013",
+        "role": "Guru Pendidikan Khusus",
+        "institution": "Sekolah Inklusi & SLB, Surabaya"
+      }
+    ]
   },
   "video": {
     "title": "Signalong Indonesia",
@@ -185,5 +230,61 @@
       "title": "Konferensi & Seminar Riset",
       "description": "Presentasi makalah ilmiah dalam seminar internasional pendidikan luar biasa."
     }
-  ]
+  ],
+  "academicProfiles": [
+    {
+      "id": "prof-scholar",
+      "name": "Google Scholar",
+      "stat": "355+ Sitasi · H-Index & i10-Index",
+      "url": "https://scholar.google.com/citations?user=hOzHm2EAAAAJ",
+      "code": "GS",
+      "color": "#4285F4"
+    },
+    {
+      "id": "prof-rg",
+      "name": "ResearchGate",
+      "stat": "45 Publikasi · 12.602 Reads",
+      "url": "https://www.researchgate.net/profile/Khofidotur-Rofiah",
+      "code": "RG",
+      "color": "#00D2FF"
+    },
+    {
+      "id": "prof-scopus",
+      "name": "Scopus",
+      "stat": "Author ID: 57196192608",
+      "url": "https://www.scopus.com/authid/detail.uri?authorId=57196192608",
+      "code": "SC",
+      "color": "#FF6B00"
+    },
+    {
+      "id": "prof-unesa",
+      "name": "UNESA Scholar",
+      "stat": "Profil Dosen Terverifikasi",
+      "url": "https://scholar.unesa.ac.id",
+      "code": "UN",
+      "color": "#003087"
+    },
+    {
+      "id": "prof-academia",
+      "name": "Academia.edu",
+      "stat": "Paparan Publikasi & Draf",
+      "url": "https://pascaunesa.academia.edu/khofidoturrofiah",
+      "code": "AC",
+      "color": "#41454A"
+    },
+    {
+      "id": "prof-sinta",
+      "name": "SINTA Kemdikbud",
+      "stat": "SINTA ID: 6010778 · Terverifikasi",
+      "url": "https://sinta.kemdikbud.go.id/authors/profile/6010778",
+      "code": "SI",
+      "color": "#C0392B"
+    }
+  ],
+  "contact": {
+    "title": "Tertarik Berkolaborasi Riset?",
+    "description": "Terbuka untuk kolaborasi riset antar perguruan tinggi, pembicara seminar, proyek intervensi inklusi, dan diskusi akademik seputar pendidikan luar biasa.",
+    "email": "khofidoturrofiah@unesa.ac.id",
+    "footerText": "© 2025 Dr. Khofidotur Rofiah, M.Pd., Ph.D. All rights reserved."
+  }
 }

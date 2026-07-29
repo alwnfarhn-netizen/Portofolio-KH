@@ -267,11 +267,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderAllDynamicContent(data) {
     if (data.profile) renderProfileInfo(data.profile);
     if (data.stats) renderStatsInfo(data.stats);
+    if (data.timelines) renderTimelines(data.timelines);
     if (data.video) renderVideoInfo(data.video);
     if (data.research && data.research.length > 0) renderResearchCards(data.research);
     if (data.publications && data.publications.length > 0) renderPublicationCards(data.publications);
     if (data.blog && data.blog.length > 0) renderBlogCards(data.blog);
     if (data.gallery && data.gallery.length > 0) renderGalleryCards(data.gallery);
+    if (data.academicProfiles && data.academicProfiles.length > 0) renderAcademicProfiles(data.academicProfiles);
+    if (data.contact) renderContactInfo(data.contact);
   }
 
   function renderProfileInfo(p) {
@@ -293,12 +296,148 @@ document.addEventListener('DOMContentLoaded', () => {
       const el = document.querySelector('.hero-tagline');
       if (el) el.innerText = p.tagline;
     }
+    if (p.badgeText) {
+      const el = document.querySelector('.hero-badge');
+      if (el) {
+        const svg = el.querySelector('svg');
+        el.innerHTML = '';
+        if (svg) el.appendChild(svg);
+        el.appendChild(document.createTextNode(' ' + p.badgeText));
+      }
+    }
+    if (p.doctorDegree) {
+      const el = document.querySelector('.doctor-badge-text p');
+      if (el) el.innerText = p.doctorDegree;
+    }
+    if (p.doctorUniv) {
+      const el = document.querySelector('.doctor-badge-text h4');
+      if (el) el.innerText = p.doctorUniv;
+    }
     if (p.avatar) {
       const img = document.querySelector('.hero-image-card img');
       if (img) img.src = p.avatar;
     }
     if (p.email) {
       document.querySelectorAll('a[href^="mailto:"]').forEach(a => a.href = `mailto:${p.email}`);
+    }
+
+    // Bio Paragraphs
+    const bioTexts = document.querySelectorAll('.bio-card .bio-text');
+    if (bioTexts.length >= 1 && p.aboutBio1) bioTexts[0].innerText = p.aboutBio1;
+    if (bioTexts.length >= 2 && p.aboutBio2) bioTexts[1].innerText = p.aboutBio2;
+
+    // Skills Chips
+    if (p.skills) {
+      const wrapper = document.querySelector('.skills-wrapper');
+      if (wrapper) {
+        wrapper.innerHTML = '';
+        const skillsArr = Array.isArray(p.skills) ? p.skills : p.skills.split(',');
+        skillsArr.forEach(skill => {
+          const s = skill.trim();
+          if (s) {
+            const chip = document.createElement('span');
+            chip.className = 'skill-chip';
+            chip.innerText = s;
+            wrapper.appendChild(chip);
+          }
+        });
+      }
+    }
+
+    // Social Links
+    if (p.scholar) {
+      document.querySelectorAll('a[title="Google Scholar"]').forEach(a => a.href = p.scholar);
+    }
+    if (p.researchgate) {
+      document.querySelectorAll('a[title="ResearchGate"]').forEach(a => a.href = p.researchgate);
+    }
+    if (p.scopus) {
+      document.querySelectorAll('a[title="Scopus ID"]').forEach(a => a.href = p.scopus);
+    }
+  }
+
+  function renderTimelines(t) {
+    if (!t) return;
+
+    // Education Timeline
+    if (t.education && t.education.length > 0) {
+      const eduContainer = document.querySelector('.timeline-card .timeline-group:first-child .timeline-list');
+      if (eduContainer) {
+        eduContainer.innerHTML = '';
+        t.education.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'timeline-item';
+          div.innerHTML = `
+            <div class="timeline-period">${item.period || ''}</div>
+            <div class="timeline-degree">${item.degree || ''}</div>
+            <div class="timeline-institution">${item.institution || ''}</div>
+            ${item.detail ? `<div class="timeline-detail">${item.detail}</div>` : ''}
+          `;
+          eduContainer.appendChild(div);
+        });
+      }
+    }
+
+    // Career Timeline
+    if (t.career && t.career.length > 0) {
+      const carContainer = document.querySelector('.timeline-card .timeline-group:last-child .timeline-list');
+      if (carContainer) {
+        carContainer.innerHTML = '';
+        t.career.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'timeline-item';
+          div.innerHTML = `
+            <div class="timeline-period">${item.period || ''}</div>
+            <div class="timeline-degree">${item.role || item.degree || ''}</div>
+            <div class="timeline-institution">${item.institution || ''}</div>
+          `;
+          carContainer.appendChild(div);
+        });
+      }
+    }
+  }
+
+  function renderAcademicProfiles(profiles) {
+    const container = document.querySelector('.profiles-grid');
+    if (!container || !profiles || profiles.length === 0) return;
+    
+    container.innerHTML = '';
+    profiles.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'profile-card';
+      if (p.color) card.style.setProperty('--platform-color', p.color);
+      card.innerHTML = `
+        <div>
+          <div class="profile-header">
+            <div class="profile-icon-box">${p.code || 'PR'}</div>
+            <h3 class="profile-name">${p.name || ''}</h3>
+          </div>
+          <p class="profile-stat">${p.stat || ''}</p>
+        </div>
+        <a href="${p.url || '#'}" target="_blank" rel="noopener noreferrer" class="profile-btn">Kunjungi Profil →</a>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function renderContactInfo(c) {
+    if (!c) return;
+    if (c.title) {
+      const el = document.querySelector('#contact .contact-box h2');
+      if (el) el.innerText = c.title;
+    }
+    if (c.description) {
+      const el = document.querySelector('#contact .contact-box p');
+      if (el) el.innerText = c.description;
+    }
+    if (c.email) {
+      document.querySelectorAll('#contact a[href^="mailto:"]').forEach(a => a.href = `mailto:${c.email}`);
+    }
+    if (c.footerText) {
+      const el = document.querySelector('.site-footer p');
+      if (el) {
+        el.innerHTML = `${c.footerText} · Dibuat oleh <a href="https://portify-sepia.vercel.app/" target="_blank" rel="noopener noreferrer">Portify.id</a>`;
+      }
     }
   }
 

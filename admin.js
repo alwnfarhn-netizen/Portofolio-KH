@@ -462,7 +462,7 @@ function uploadResearchFile(fileInput, index) {
   }
 }
 
-// 0. Profile & Stats Management
+// 0. Profile & Bio Management
 function renderProfile() {
   if (!cmsData.profile) cmsData.profile = {};
   if (!cmsData.stats) cmsData.stats = {};
@@ -475,7 +475,18 @@ function renderProfile() {
   if (document.getElementById('prof-institution')) document.getElementById('prof-institution').value = p.institution || '';
   if (document.getElementById('prof-email')) document.getElementById('prof-email').value = p.email || '';
   if (document.getElementById('prof-tagline')) document.getElementById('prof-tagline').value = p.tagline || '';
+  if (document.getElementById('prof-badge')) document.getElementById('prof-badge').value = p.badgeText || 'Fakultas Ilmu Pendidikan · UNESA';
+  if (document.getElementById('prof-doc-degree')) document.getElementById('prof-doc-degree').value = p.doctorDegree || 'Gelar Doktor (Ph.D.)';
+  if (document.getElementById('prof-doc-univ')) document.getElementById('prof-doc-univ').value = p.doctorUniv || 'Pedagogical Univ. of Cracow';
   
+  if (document.getElementById('prof-bio1')) document.getElementById('prof-bio1').value = p.aboutBio1 || '';
+  if (document.getElementById('prof-bio2')) document.getElementById('prof-bio2').value = p.aboutBio2 || '';
+  if (document.getElementById('prof-skills')) document.getElementById('prof-skills').value = Array.isArray(p.skills) ? p.skills.join(', ') : (p.skills || '');
+
+  if (document.getElementById('prof-scholar')) document.getElementById('prof-scholar').value = p.scholar || '';
+  if (document.getElementById('prof-rg')) document.getElementById('prof-rg').value = p.researchgate || '';
+  if (document.getElementById('prof-scopus')) document.getElementById('prof-scopus').value = p.scopus || '';
+
   if (document.getElementById('prof-avatar')) {
     document.getElementById('prof-avatar').value = p.avatar || 'assets/foto-profil-nobg.png';
   }
@@ -499,32 +510,26 @@ async function saveProfileForm(e) {
   const newInstitution = document.getElementById('prof-institution').value;
   const newEmail = document.getElementById('prof-email').value;
   const newTagline = document.getElementById('prof-tagline').value;
+  const newBadge = document.getElementById('prof-badge').value;
+  const newDocDegree = document.getElementById('prof-doc-degree').value;
+  const newDocUniv = document.getElementById('prof-doc-univ').value;
+  const newBio1 = document.getElementById('prof-bio1').value;
+  const newBio2 = document.getElementById('prof-bio2').value;
+  const newSkills = document.getElementById('prof-skills').value;
+  const newScholar = document.getElementById('prof-scholar').value;
+  const newRg = document.getElementById('prof-rg').value;
+  const newScopus = document.getElementById('prof-scopus').value;
+
   const newAvatar = document.getElementById('prof-avatar').value;
   const newPubs = document.getElementById('stat-pubs').value;
   const newCitations = document.getElementById('stat-citations').value;
   const newYears = document.getElementById('stat-years').value;
   const newCountries = document.getElementById('stat-countries').value;
 
-  const changes = [];
-  if (newName !== cmsData.profile.name) changes.push(`Nama: "${cmsData.profile.name || '-'}" → "${newName}"`);
-  if (newSubtitle !== cmsData.profile.subtitle) changes.push(`Jabatan: "${cmsData.profile.subtitle || '-'}" → "${newSubtitle}"`);
-  if (newInstitution !== cmsData.profile.institution) changes.push(`Institusi: "${cmsData.profile.institution || '-'}" → "${newInstitution}"`);
-  if (newEmail !== cmsData.profile.email) changes.push(`Email: ${newEmail}`);
-  if (newTagline !== cmsData.profile.tagline) changes.push('Tagline diperbarui');
-  if (newAvatar !== cmsData.profile.avatar) changes.push('Foto profil diperbarui');
-  if (newPubs !== cmsData.stats.publications) changes.push(`Publikasi: ${newPubs}`);
-  if (newCitations !== cmsData.stats.citations) changes.push(`Sitasi: ${newCitations}`);
-
-  if (changes.length === 0) {
-    await cmsAlert('Tidak ada perubahan yang terdeteksi.', 'info');
-    return;
-  }
-
   const ok = await cmsModal({
     icon: '🛡️',
-    title: 'Konfirmasi Simpan Profil',
-    body: 'Periksa ringkasan perubahan berikut sebelum diterapkan ke website:',
-    changes,
+    title: 'Konfirmasi Simpan Profil & Bio',
+    body: 'Apakah Anda yakin ingin memperbarui informasi profil utama & biodata akademik?',
     confirmLabel: 'Ya, Simpan Profil'
   });
 
@@ -535,11 +540,270 @@ async function saveProfileForm(e) {
   cmsData.profile.institution = newInstitution;
   cmsData.profile.email = newEmail;
   cmsData.profile.tagline = newTagline;
+  cmsData.profile.badgeText = newBadge;
+  cmsData.profile.doctorDegree = newDocDegree;
+  cmsData.profile.doctorUniv = newDocUniv;
+  cmsData.profile.aboutBio1 = newBio1;
+  cmsData.profile.aboutBio2 = newBio2;
+  cmsData.profile.skills = newSkills;
+  cmsData.profile.scholar = newScholar;
+  cmsData.profile.researchgate = newRg;
+  cmsData.profile.scopus = newScopus;
+
   cmsData.profile.avatar = newAvatar;
   cmsData.stats.publications = newPubs;
   cmsData.stats.citations = newCitations;
   cmsData.stats.years = newYears;
   cmsData.stats.countries = newCountries;
+
+  saveAllChanges();
+}
+
+// 0.5. Timelines (Pendidikan & Karier) Management
+function renderTimelines() {
+  if (!cmsData.timelines) cmsData.timelines = { education: [], career: [] };
+  const eduTbody = document.getElementById('table-edu-body');
+  const carTbody = document.getElementById('table-car-body');
+
+  if (eduTbody) {
+    eduTbody.innerHTML = '';
+    (cmsData.timelines.education || []).forEach((item, index) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="badge-tag">${escapeHTML(item.period)}</span></td>
+        <td><strong>${escapeHTML(item.degree)}</strong></td>
+        <td>${escapeHTML(item.institution)}</td>
+        <td>${escapeHTML(item.detail || '-')}</td>
+        <td>
+          <button class="btn-warning btn-sm" onclick="editEduItem(${index})" style="margin-right: 4px;">✏️ Edit</button>
+          <button class="btn-danger btn-sm" onclick="removeEduItem(${index})">🗑️ Hapus</button>
+        </td>
+      `;
+      eduTbody.appendChild(tr);
+    });
+  }
+
+  if (carTbody) {
+    carTbody.innerHTML = '';
+    (cmsData.timelines.career || []).forEach((item, index) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="badge-tag">${escapeHTML(item.period)}</span></td>
+        <td><strong>${escapeHTML(item.role || item.degree)}</strong></td>
+        <td>${escapeHTML(item.institution)}</td>
+        <td>
+          <button class="btn-warning btn-sm" onclick="editCarItem(${index})" style="margin-right: 4px;">✏️ Edit</button>
+          <button class="btn-danger btn-sm" onclick="removeCarItem(${index})">🗑️ Hapus</button>
+        </td>
+      `;
+      carTbody.appendChild(tr);
+    });
+  }
+}
+
+async function saveEducationForm(e) {
+  e.preventDefault();
+  if (!cmsData.timelines) cmsData.timelines = { education: [], career: [] };
+  if (!cmsData.timelines.education) cmsData.timelines.education = [];
+
+  const editIndex = parseInt(document.getElementById('edu-edit-index').value);
+  const period = document.getElementById('edu-period').value;
+  const degree = document.getElementById('edu-degree').value;
+  const institution = document.getElementById('edu-institution').value;
+  const detail = document.getElementById('edu-detail').value;
+
+  const itemObj = {
+    id: editIndex >= 0 ? cmsData.timelines.education[editIndex].id : `edu-${Date.now()}`,
+    period, degree, institution, detail
+  };
+
+  const isEdit = editIndex >= 0;
+  if (isEdit) {
+    cmsData.timelines.education[editIndex] = itemObj;
+  } else {
+    cmsData.timelines.education.push(itemObj);
+  }
+
+  resetEduForm();
+  renderTimelines();
+  saveAllChanges();
+}
+
+function editEduItem(index) {
+  const item = cmsData.timelines.education[index];
+  if (!item) return;
+
+  document.getElementById('edu-edit-index').value = index;
+  document.getElementById('edu-period').value = item.period;
+  document.getElementById('edu-degree').value = item.degree;
+  document.getElementById('edu-institution').value = item.institution;
+  document.getElementById('edu-detail').value = item.detail || '';
+
+  document.getElementById('edu-form-title').innerText = '✏️ Edit Riwayat Pendidikan';
+  document.getElementById('btn-save-edu').innerText = '💾 Simpan Perubahan';
+  document.getElementById('btn-cancel-edu').style.display = 'inline-block';
+}
+
+function resetEduForm() {
+  document.getElementById('edu-edit-index').value = "-1";
+  document.getElementById('form-edu').reset();
+  document.getElementById('edu-form-title').innerText = '➕ Tambah Riwayat Pendidikan';
+  document.getElementById('btn-save-edu').innerText = '➕ Tambah ke Riwayat';
+  document.getElementById('btn-cancel-edu').style.display = 'none';
+}
+
+async function removeEduItem(index) {
+  const item = cmsData.timelines.education[index];
+  if (!item) return;
+  const ok = await cmsModal({
+    icon: '🗑️', title: 'Hapus Riwayat Pendidikan?',
+    body: `Apakah Anda yakin ingin menghapus "${item.degree} (${item.period})"?`,
+    isDanger: true, confirmLabel: 'Ya, Hapus'
+  });
+  if (ok) {
+    cmsData.timelines.education.splice(index, 1);
+    renderTimelines();
+    saveAllChanges();
+  }
+}
+
+async function saveCareerForm(e) {
+  e.preventDefault();
+  if (!cmsData.timelines) cmsData.timelines = { education: [], career: [] };
+  if (!cmsData.timelines.career) cmsData.timelines.career = [];
+
+  const editIndex = parseInt(document.getElementById('car-edit-index').value);
+  const period = document.getElementById('car-period').value;
+  const role = document.getElementById('car-role').value;
+  const institution = document.getElementById('car-institution').value;
+
+  const itemObj = {
+    id: editIndex >= 0 ? cmsData.timelines.career[editIndex].id : `car-${Date.now()}`,
+    period, role, institution
+  };
+
+  const isEdit = editIndex >= 0;
+  if (isEdit) {
+    cmsData.timelines.career[editIndex] = itemObj;
+  } else {
+    cmsData.timelines.career.push(itemObj);
+  }
+
+  resetCarForm();
+  renderTimelines();
+  saveAllChanges();
+}
+
+function editCarItem(index) {
+  const item = cmsData.timelines.career[index];
+  if (!item) return;
+
+  document.getElementById('car-edit-index').value = index;
+  document.getElementById('car-period').value = item.period;
+  document.getElementById('car-role').value = item.role || item.degree;
+  document.getElementById('car-institution').value = item.institution;
+
+  document.getElementById('car-form-title').innerText = '✏️ Edit Riwayat Karier';
+  document.getElementById('btn-save-car').innerText = '💾 Simpan Perubahan';
+  document.getElementById('btn-cancel-car').style.display = 'inline-block';
+}
+
+function resetCarForm() {
+  document.getElementById('car-edit-index').value = "-1";
+  document.getElementById('form-car').reset();
+  document.getElementById('car-form-title').innerText = '➕ Tambah Riwayat Karier';
+  document.getElementById('btn-save-car').innerText = '➕ Tambah ke Karier';
+  document.getElementById('btn-cancel-car').style.display = 'none';
+}
+
+async function removeCarItem(index) {
+  const item = cmsData.timelines.career[index];
+  if (!item) return;
+  const ok = await cmsModal({
+    icon: '🗑️', title: 'Hapus Riwayat Karier?',
+    body: `Apakah Anda yakin ingin menghapus "${item.role || item.degree} (${item.period})"?`,
+    isDanger: true, confirmLabel: 'Ya, Hapus'
+  });
+  if (ok) {
+    cmsData.timelines.career.splice(index, 1);
+    renderTimelines();
+    saveAllChanges();
+  }
+}
+
+// 0.6. Academic Profiles Management
+function renderAcademicProfiles() {
+  const tbody = document.getElementById('table-academic-body');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+
+  if (!cmsData.academicProfiles) cmsData.academicProfiles = [];
+
+  cmsData.academicProfiles.forEach((item, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="badge-tag" style="background:${item.color || '#2563eb'}; color:#fff;">${escapeHTML(item.code || 'PR')}</span></td>
+      <td><strong>${escapeHTML(item.name)}</strong></td>
+      <td>${escapeHTML(item.stat)}</td>
+      <td><a href="${escapeHTML(item.url)}" target="_blank" style="color:#2563eb; font-size:0.85rem;">Tautan ↗</a></td>
+      <td>
+        <button class="btn-warning btn-sm" onclick="editAcademicProfile(${index})" style="margin-right: 4px;">✏️ Edit</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function editAcademicProfile(index) {
+  const item = cmsData.academicProfiles[index];
+  if (!item) return;
+
+  document.getElementById('acad-edit-index').value = index;
+  document.getElementById('acad-name').value = item.name;
+  document.getElementById('acad-stat').value = item.stat;
+  document.getElementById('acad-url').value = item.url;
+  document.getElementById('acad-code').value = item.code || '';
+  document.getElementById('acad-color').value = item.color || '#2563eb';
+
+  document.getElementById('acad-form-title').innerText = `✏️ Edit Kartu ${item.name}`;
+  document.getElementById('btn-save-acad').innerText = '💾 Simpan Perubahan Profil';
+  window.scrollTo({ top: 100, behavior: 'smooth' });
+}
+
+async function saveAcademicProfileForm(e) {
+  e.preventDefault();
+  const index = parseInt(document.getElementById('acad-edit-index').value);
+  if (index >= 0 && cmsData.academicProfiles[index]) {
+    cmsData.academicProfiles[index].name = document.getElementById('acad-name').value;
+    cmsData.academicProfiles[index].stat = document.getElementById('acad-stat').value;
+    cmsData.academicProfiles[index].url = document.getElementById('acad-url').value;
+    cmsData.academicProfiles[index].code = document.getElementById('acad-code').value;
+    cmsData.academicProfiles[index].color = document.getElementById('acad-color').value;
+
+    renderAcademicProfiles();
+    saveAllChanges();
+  }
+}
+
+// 0.7. Contact & Footer Management
+function renderContact() {
+  if (!cmsData.contact) cmsData.contact = {};
+  const c = cmsData.contact;
+
+  if (document.getElementById('contact-title')) document.getElementById('contact-title').value = c.title || '';
+  if (document.getElementById('contact-desc')) document.getElementById('contact-desc').value = c.description || '';
+  if (document.getElementById('contact-email')) document.getElementById('contact-email').value = c.email || '';
+  if (document.getElementById('contact-footer')) document.getElementById('contact-footer').value = c.footerText || '';
+}
+
+async function saveContactForm(e) {
+  e.preventDefault();
+  if (!cmsData.contact) cmsData.contact = {};
+
+  cmsData.contact.title = document.getElementById('contact-title').value;
+  cmsData.contact.description = document.getElementById('contact-desc').value;
+  cmsData.contact.email = document.getElementById('contact-email').value;
+  cmsData.contact.footerText = document.getElementById('contact-footer').value;
 
   saveAllChanges();
 }

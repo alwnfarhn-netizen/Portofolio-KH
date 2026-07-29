@@ -543,12 +543,16 @@
 
       <nav class="sidebar-nav">
         <button class="sidebar-tab-btn active" onclick="switchTab('profile')">Profil &amp; Bio</button>
+        <button class="sidebar-tab-btn" onclick="switchTab('timelines')">Pendidikan &amp; Karier</button>
         <button class="sidebar-tab-btn" onclick="switchTab('pubs')">Publikasi</button>
         <button class="sidebar-tab-btn" onclick="switchTab('research')">Fokus Riset</button>
         <button class="sidebar-tab-btn" onclick="switchTab('blog')">Blog Artikel</button>
         <button class="sidebar-tab-btn" onclick="switchTab('gallery')">Galeri</button>
         <button class="sidebar-tab-btn" onclick="switchTab('video')">Video Showcase</button>
+        <button class="sidebar-tab-btn" onclick="switchTab('academic')">Profil Akademik</button>
+        <button class="sidebar-tab-btn" onclick="switchTab('contact')">Kontak &amp; Footer</button>
         <button class="sidebar-tab-btn tab-export" onclick="switchTab('export')">Simpan &amp; Export</button>
+        <button class="sidebar-tab-btn" onclick="switchTab('security')" style="background:rgba(56,189,248,0.12); color:#38bdf8; border:1px solid rgba(56,189,248,0.25);">🔒 Keamanan PIN</button>
         <button class="sidebar-tab-btn" onclick="switchTab('guide')" style="background:rgba(16,185,129,0.12); color:#10b981; border:1px solid rgba(16,185,129,0.25);">Panduan Penggunaan</button>
       </nav>
 
@@ -635,9 +639,55 @@
               </div>
             </div>
 
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label>Label Badge Hero</label>
+                <input type="text" id="prof-badge" class="form-control" placeholder="Fakultas Ilmu Pendidikan · UNESA">
+              </div>
+              <div class="form-group">
+                <label>Badge Gelar Doktor</label>
+                <input type="text" id="prof-doc-degree" class="form-control" placeholder="Gelar Doktor (Ph.D.)">
+              </div>
+              <div class="form-group">
+                <label>Kampus Doktor</label>
+                <input type="text" id="prof-doc-univ" class="form-control" placeholder="Pedagogical Univ. of Cracow">
+              </div>
+            </div>
+
             <div class="form-group">
               <label>Tagline &amp; Ringkasan Kepakaran (Hero Description)</label>
-              <textarea id="prof-tagline" class="form-control" style="min-height: 80px;" required></textarea>
+              <textarea id="prof-tagline" class="form-control" style="min-height: 70px;" required></textarea>
+            </div>
+
+            <h3 style="font-size: 1.1rem; margin: 1.5rem 0 1rem; color: #2563eb;">Paragraf Biografi Akademik (Section Tentang Saya)</h3>
+            <div class="form-group">
+              <label>Biografi Paragraf 1</label>
+              <textarea id="prof-bio1" class="form-control" style="min-height: 80px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Biografi Paragraf 2</label>
+              <textarea id="prof-bio2" class="form-control" style="min-height: 80px;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Keahlian &amp; Minat Riset (Daftar Tag Chip, Pisahkan dengan Koma)</label>
+              <input type="text" id="prof-skills" class="form-control" placeholder="Pendidikan Inklusif, Pendidikan Luar Biasa, Signalong Indonesia, Pendidikan Tunarungu">
+            </div>
+
+            <h3 style="font-size: 1.1rem; margin: 1.5rem 0 1rem; color: #2563eb;">Tautan Profil Media Sosial / Akademik Hero</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label>Google Scholar URL</label>
+                <input type="url" id="prof-scholar" class="form-control" placeholder="https://scholar.google.com/...">
+              </div>
+              <div class="form-group">
+                <label>ResearchGate URL</label>
+                <input type="url" id="prof-rg" class="form-control" placeholder="https://www.researchgate.net/...">
+              </div>
+              <div class="form-group">
+                <label>Scopus Profile URL</label>
+                <input type="url" id="prof-scopus" class="form-control" placeholder="https://www.scopus.com/...">
+              </div>
             </div>
 
             <h3 style="font-size: 1.1rem; margin: 1.5rem 0 1rem; color: #2563eb;">Statistik Angka Utama (Stats Counter)</h3>
@@ -660,8 +710,92 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Simpan Info Profil &amp; Stats</button>
+            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Simpan Info Profil &amp; Bio Lengkap</button>
           </form>
+        </div>
+      </div>
+
+      <!-- TAB 0.5: Pendidikan & Karier -->
+      <div id="tab-timelines" class="tab-content" style="display: none;">
+        <div class="admin-card">
+          <h2 id="edu-form-title" style="font-size: 1.4rem; margin-bottom: 1.25rem;">➕ Tambah Riwayat Pendidikan</h2>
+          <form id="form-edu" onsubmit="saveEducationForm(event)">
+            <input type="hidden" id="edu-edit-index" value="-1">
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem;">
+              <div class="form-group">
+                <label>Tahun / Periode</label>
+                <input type="text" id="edu-period" class="form-control" placeholder="Contoh: 2020 – 2024" required>
+              </div>
+              <div class="form-group">
+                <label>Gelar / Jenjang</label>
+                <input type="text" id="edu-degree" class="form-control" placeholder="Contoh: Doctor of Philosophy (Ph.D.)" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Nama Perguruan Tinggi / Institusi</label>
+              <input type="text" id="edu-institution" class="form-control" placeholder="Contoh: Pedagogical University of Cracow, Polandia" required>
+            </div>
+            <div class="form-group">
+              <label>Keterangan Disertasi / Detail (Opsional)</label>
+              <input type="text" id="edu-detail" class="form-control" placeholder="Contoh: Disertasi: Teachers' attitudes toward inclusive education...">
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+              <button type="submit" class="btn btn-primary" id="btn-save-edu">➕ Tambah ke Riwayat</button>
+              <button type="button" class="btn btn-warning" id="btn-cancel-edu" onclick="resetEduForm()" style="display: none;">Batal Edit</button>
+            </div>
+          </form>
+
+          <h3 style="font-size: 1.15rem; margin: 1.75rem 0 1rem; color: #1e293b;">Daftar Riwayat Pendidikan</h3>
+          <table class="item-list-table">
+            <thead>
+              <tr>
+                <th>Periode</th>
+                <th>Gelar</th>
+                <th>Institusi</th>
+                <th>Detail</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="table-edu-body"></tbody>
+          </table>
+        </div>
+
+        <div class="admin-card">
+          <h2 id="car-form-title" style="font-size: 1.4rem; margin-bottom: 1.25rem;">➕ Tambah Riwayat Karier</h2>
+          <form id="form-car" onsubmit="saveCareerForm(event)">
+            <input type="hidden" id="car-edit-index" value="-1">
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem;">
+              <div class="form-group">
+                <label>Tahun / Periode</label>
+                <input type="text" id="car-period" class="form-control" placeholder="Contoh: 2014 – Sekarang" required>
+              </div>
+              <div class="form-group">
+                <label>Jabatan / Peran</label>
+                <input type="text" id="car-role" class="form-control" placeholder="Contoh: Dosen & Kepala Prodi S1 PLB" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Institusi / Tempat Kerja</label>
+              <input type="text" id="car-institution" class="form-control" placeholder="Contoh: Dept. Pendidikan Luar Biasa, FIP UNESA" required>
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+              <button type="submit" class="btn btn-primary" id="btn-save-car">➕ Tambah ke Karier</button>
+              <button type="button" class="btn btn-warning" id="btn-cancel-car" onclick="resetCarForm()" style="display: none;">Batal Edit</button>
+            </div>
+          </form>
+
+          <h3 style="font-size: 1.15rem; margin: 1.75rem 0 1rem; color: #1e293b;">Daftar Riwayat Karier</h3>
+          <table class="item-list-table">
+            <thead>
+              <tr>
+                <th>Periode</th>
+                <th>Jabatan</th>
+                <th>Institusi</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="table-car-body"></tbody>
+          </table>
         </div>
       </div>
 
@@ -883,7 +1017,77 @@
                 <input type="text" id="vid-url" class="form-control" placeholder="https://www.youtube-nocookie.com/embed/..." required>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">Simpan Pengaturan Video</button>
+      </div>
+
+      <!-- TAB 5.5: Profil Akademik (6 Platforms) -->
+      <div id="tab-academic" class="tab-content" style="display: none;">
+        <div class="admin-card">
+          <h2 id="acad-form-title" style="font-size: 1.4rem; margin-bottom: 1.25rem;">Kelola Kartu Profil Akademik (6 Platforms)</h2>
+          <form id="form-academic" onsubmit="saveAcademicProfileForm(event)">
+            <input type="hidden" id="acad-edit-index" value="-1">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label>Nama Platform</label>
+                <input type="text" id="acad-name" class="form-control" placeholder="Google Scholar" required>
+              </div>
+              <div class="form-group">
+                <label>Kode Singkat Icon (2 Huruf)</label>
+                <input type="text" id="acad-code" class="form-control" placeholder="GS" required maxlength="3">
+              </div>
+              <div class="form-group">
+                <label>Warna Brand (Hex Accent)</label>
+                <input type="color" id="acad-color" class="form-control" value="#2563eb" style="height: 42px; padding: 2px;">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Statistik / Sub-keterangan Kartu</label>
+              <input type="text" id="acad-stat" class="form-control" placeholder="355+ Sitasi · H-Index & i10-Index" required>
+            </div>
+            <div class="form-group">
+              <label>URL Tautan Profil</label>
+              <input type="url" id="acad-url" class="form-control" placeholder="https://scholar.google.com/..." required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btn-save-acad">💾 Simpan Perubahan Kartu</button>
+          </form>
+
+          <h3 style="font-size: 1.15rem; margin: 1.75rem 0 1rem; color: #1e293b;">Daftar 6 Platform Akademik Terdaftar</h3>
+          <table class="item-list-table">
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Platform</th>
+                <th>Statistik</th>
+                <th>URL Tautan</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="table-academic-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 5.6: Kontak & Footer -->
+      <div id="tab-contact" class="tab-content" style="display: none;">
+        <div class="admin-card">
+          <h2 style="font-size: 1.4rem; margin-bottom: 1.25rem;">Kelola Informasi Kontak &amp; Footer</h2>
+          <form id="form-contact" onsubmit="saveContactForm(event)">
+            <div class="form-group">
+              <label>Judul Utama Kontak Section</label>
+              <input type="text" id="contact-title" class="form-control" placeholder="Tertarik Berkolaborasi Riset?" required>
+            </div>
+            <div class="form-group">
+              <label>Deskripsi Keterangan Kontak</label>
+              <textarea id="contact-desc" class="form-control" style="min-height: 80px;" required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Email Kontak Utama</label>
+              <input type="email" id="contact-email" class="form-control" placeholder="khofidoturrofiah@unesa.ac.id" required>
+            </div>
+            <div class="form-group">
+              <label>Teks Hak Cipta Footer</label>
+              <input type="text" id="contact-footer" class="form-control" placeholder="© 2025 Dr. Khofidotur Rofiah, M.Pd., Ph.D. All rights reserved." required>
+            </div>
+            <button type="submit" class="btn btn-primary">💾 Simpan Pengaturan Kontak &amp; Footer</button>
           </form>
         </div>
       </div>
