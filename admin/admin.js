@@ -416,11 +416,14 @@ function switchTab(tabName) {
 
 function renderAll() {
   renderProfile();
+  renderTimelines();
   renderPubs();
   renderResearch();
   renderBlog();
   renderGallery();
   renderVideo();
+  renderAcademic();
+  renderContact();
   updateJSONPreview();
 }
 
@@ -1286,4 +1289,267 @@ async function changeAdminPIN(e) {
   document.getElementById('confirm-pin').value = '';
 
   cmsAlert('🔐 PIN Keamanan CMS berhasil diperbarui!', 'success');
+}
+
+// ==========================================
+// 1. Contact & Footer Handlers
+// ==========================================
+function renderContact() {
+  const c = cmsData.contact || {};
+  const elTitle = document.getElementById('contact-title');
+  const elDesc = document.getElementById('contact-desc');
+  const elEmail = document.getElementById('contact-email');
+  const elFooter = document.getElementById('contact-footer');
+
+  if (elTitle) elTitle.value = c.title || 'Tertarik Berkolaborasi Riset?';
+  if (elDesc) elDesc.value = c.description || 'Terbuka untuk kolaborasi riset antar perguruan tinggi, pembicara seminar, proyek intervensi inklusi, dan diskusi akademik seputar pendidikan luar biasa.';
+  if (elEmail) elEmail.value = c.email || cmsData.profile?.email || 'khofidoturrofiah@unesa.ac.id';
+  if (elFooter) elFooter.value = c.footerText || '© 2025 Dr. Khofidotur Rofiah, M.Pd., Ph.D. All rights reserved.';
+}
+
+async function saveContactForm(e) {
+  if (e) e.preventDefault();
+  const title = document.getElementById('contact-title').value.trim();
+  const description = document.getElementById('contact-desc').value.trim();
+  const email = document.getElementById('contact-email').value.trim();
+  const footerText = document.getElementById('contact-footer').value.trim();
+
+  cmsData.contact = { title, description, email, footerText };
+
+  localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
+  updateLastSaved();
+
+  const syncOk = await syncToGitHubCloud();
+  if (syncOk) {
+    await cmsAlert('✅ Pengaturan Kontak & Footer berhasil disimpan dan dipublikasikan ke live website!', 'success');
+  } else {
+    await cmsAlert('✅ Pengaturan Kontak & Footer disimpan di lokal (Preview Mode).', 'success');
+  }
+}
+
+// ==========================================
+// 2. Academic Profiles (6 Platforms) Handlers
+// ==========================================
+function renderAcademic() {
+  const tbody = document.getElementById('table-academic-body');
+  if (!tbody) return;
+
+  const list = cmsData.academicProfiles || [];
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">Belum ada platform akademik.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = list.map((item, idx) => `
+    <tr>
+      <td>
+        <span style="display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:6px; background:${item.color || '#2563eb'}; color:#fff; font-weight:700; font-size:0.85rem;">
+          ${escapeHTML(item.code || 'PR')}
+        </span>
+      </td>
+      <td><strong>${escapeHTML(item.name)}</strong></td>
+      <td>${escapeHTML(item.stat)}</td>
+      <td><a href="${sanitizeURL(item.url)}" target="_blank" style="color:#2563eb;">Link ↗</a></td>
+      <td>
+        <div style="display:flex; gap:0.4rem;">
+          <button onclick="editAcademicProfile(${idx})" class="btn btn-primary" style="padding:0.3rem 0.6rem; font-size:0.8rem;">Edit</button>
+          <button onclick="deleteAcademicProfile(${idx})" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.8rem;">Hapus</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function editAcademicProfile(idx) {
+  const item = (cmsData.academicProfiles || [])[idx];
+  if (!item) return;
+
+  document.getElementById('acad-edit-index').value = idx;
+  document.getElementById('acad-name').value = item.name || '';
+  document.getElementById('acad-code').value = item.code || '';
+  document.getElementById('acad-color').value = item.color || '#2563eb';
+  document.getElementById('acad-stat').value = item.stat || '';
+  document.getElementById('acad-url').value = item.url || '';
+
+  const titleEl = document.getElementById('acad-form-title');
+  if (titleEl) titleEl.innerText = `Edit Kartu Profil Akademik #${idx + 1}`;
+  const btnSave = document.getElementById('btn-save-acad');
+  if (btnSave) btnSave.innerText = '💾 Perbarui Kartu';
+}
+
+async function deleteAcademicProfile(idx) {
+  const item = (cmsData.academicProfiles || [])[idx];
+  if (!item) return;
+
+  const ok = await cmsModal({
+    icon: '🗑️',
+    title: 'Hapus Kartu Profil Akademik?',
+    body: `Apakah Anda yakin ingin menghapus platform "${item.name}" dari daftar?`,
+    isDanger: true,
+    confirmLabel: 'Ya, Hapus'
+  });
+
+  if (ok) {
+    cmsData.academicProfiles.splice(idx, 1);
+    localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
+    renderAcademic();
+    await syncToGitHubCloud();
+    await cmsAlert('Kartu profil akademik berhasil dihapus.', 'success');
+  }
+}
+
+async function saveAcademicProfileForm(e) {
+  if (e) e.preventDefault();
+
+  const idx = parseInt(document.getElementById('acad-edit-index').value, 10);
+  const name = document.getElementById('acad-name').value.trim();
+  const code = document.getElementById('acad-code').value.trim();
+  const color = document.getElementById('acad-color').value.trim();
+  const stat = document.getElementById('acad-stat').value.trim();
+  const url = document.getElementById('acad-url').value.trim();
+
+  if (!cmsData.academicProfiles) cmsData.academicProfiles = [];
+
+  const newItem = { name, code, color, stat, url };
+
+  if (idx >= 0 && idx < cmsData.academicProfiles.length) {
+    cmsData.academicProfiles[idx] = newItem;
+  } else {
+    cmsData.academicProfiles.push(newItem);
+  }
+
+  localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
+  updateLastSaved();
+  renderAcademic();
+
+  document.getElementById('form-academic').reset();
+  document.getElementById('acad-edit-index').value = '-1';
+  const titleEl = document.getElementById('acad-form-title');
+  if (titleEl) titleEl.innerText = 'Kelola Kartu Profil Akademik (6 Platforms)';
+  const btnSave = document.getElementById('btn-save-acad');
+  if (btnSave) btnSave.innerText = '💾 Simpan Perubahan Kartu';
+
+  const syncOk = await syncToGitHubCloud();
+  if (syncOk) {
+    await cmsAlert('✅ Data Profil Akademik berhasil disimpan & dipublikasikan!', 'success');
+  } else {
+    await cmsAlert('✅ Data Profil Akademik disimpan di lokal.', 'success');
+  }
+}
+
+// ==========================================
+// 3. Timelines (Education & Career) Handlers
+// ==========================================
+function renderTimelines() {
+  const t = cmsData.timelines || { education: [], career: [] };
+
+  // Edu Table
+  const tbodyEdu = document.getElementById('table-edu-body');
+  if (tbodyEdu) {
+    const list = t.education || [];
+    if (list.length === 0) {
+      tbodyEdu.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">Belum ada riwayat pendidikan.</td></tr>';
+    } else {
+      tbodyEdu.innerHTML = list.map((item, idx) => `
+        <tr>
+          <td><strong>${escapeHTML(item.period)}</strong></td>
+          <td>${escapeHTML(item.degree)}</td>
+          <td>${escapeHTML(item.institution)}</td>
+          <td><small>${escapeHTML(item.detail || '-')}</small></td>
+          <td>
+            <button onclick="deleteTimelineEdu(${idx})" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.8rem;">Hapus</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  // Career Table
+  const tbodyExp = document.getElementById('table-exp-body');
+  if (tbodyExp) {
+    const list = t.career || [];
+    if (list.length === 0) {
+      tbodyExp.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#94a3b8;">Belum ada riwayat karier.</td></tr>';
+    } else {
+      tbodyExp.innerHTML = list.map((item, idx) => `
+        <tr>
+          <td><strong>${escapeHTML(item.period)}</strong></td>
+          <td>${escapeHTML(item.role || item.degree)}</td>
+          <td>${escapeHTML(item.institution)}</td>
+          <td>
+            <button onclick="deleteTimelineExp(${idx})" class="btn btn-danger" style="padding:0.3rem 0.6rem; font-size:0.8rem;">Hapus</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+  }
+}
+
+async function saveTimelineEduForm(e) {
+  if (e) e.preventDefault();
+  const period = document.getElementById('edu-period').value.trim();
+  const degree = document.getElementById('edu-degree').value.trim();
+  const institution = document.getElementById('edu-institution').value.trim();
+  const detail = document.getElementById('edu-detail').value.trim();
+
+  if (!cmsData.timelines) cmsData.timelines = { education: [], career: [] };
+  if (!cmsData.timelines.education) cmsData.timelines.education = [];
+
+  cmsData.timelines.education.push({ period, degree, institution, detail });
+
+  localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
+  updateLastSaved();
+  renderTimelines();
+
+  document.getElementById('form-edu').reset();
+  const syncOk = await syncToGitHubCloud();
+  if (syncOk) {
+    await cmsAlert('✅ Riwayat pendidikan berhasil ditambahkan & dipublikasikan!', 'success');
+  } else {
+    await cmsAlert('✅ Riwayat pendidikan disimpan di lokal.', 'success');
+  }
+}
+
+async function saveTimelineExpForm(e) {
+  if (e) e.preventDefault();
+  const period = document.getElementById('exp-period').value.trim();
+  const role = document.getElementById('exp-role').value.trim();
+  const institution = document.getElementById('exp-institution').value.trim();
+
+  if (!cmsData.timelines) cmsData.timelines = { education: [], career: [] };
+  if (!cmsData.timelines.career) cmsData.timelines.career = [];
+
+  cmsData.timelines.career.push({ period, role, institution });
+
+  localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
+  updateLastSaved();
+  renderTimelines();
+
+  document.getElementById('form-exp').reset();
+  const syncOk = await syncToGitHubCloud();
+  if (syncOk) {
+    await cmsAlert('✅ Riwayat karier berhasil ditambahkan & dipublikasikan!', 'success');
+  } else {
+    await cmsAlert('✅ Riwayat karier disimpan di lokal.', 'success');
+  }
+}
+
+async function deleteTimelineEdu(idx) {
+  if (cmsData.timelines && cmsData.timelines.education) {
+    cmsData.timelines.education.splice(idx, 1);
+    localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
+    renderTimelines();
+    await syncToGitHubCloud();
+    await cmsAlert('Item pendidikan berhasil dihapus.', 'success');
+  }
+}
+
+async function deleteTimelineExp(idx) {
+  if (cmsData.timelines && cmsData.timelines.career) {
+    cmsData.timelines.career.splice(idx, 1);
+    localStorage.setItem('portfolio_cms_data', JSON.stringify(cmsData));
+    renderTimelines();
+    await syncToGitHubCloud();
+    await cmsAlert('Item karier berhasil dihapus.', 'success');
+  }
 }
